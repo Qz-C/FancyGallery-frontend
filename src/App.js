@@ -1,10 +1,11 @@
 import React from 'react';
 import './global.css';
+import Login from './pages/Login'
 
 function App() {
   return (
     <div className="App">
-      Start Page
+      < Login/>
     </div>
   );
 }
