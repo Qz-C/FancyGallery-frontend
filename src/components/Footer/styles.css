@@ -1,0 +1,10 @@
+footer{
+    border: dotted 2px firebrick;
+    padding: 20px;
+    text-align: right;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    left: 0;
+    filter: drop-shadow( 3px 3px 3px #000000);
+}
