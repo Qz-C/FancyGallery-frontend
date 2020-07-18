@@ -2,50 +2,24 @@ import React from "react";
 
 import './styles.css';
 
+import Header from '../../components/Header';
+
+import Footer from '../../components/Footer';
+
+import  LoginFloatBox from '../../components/LoginFloatBox'
+
 import '../../global.css';
-
-import { FaCamera } from "react-icons/fa";
-
-import { FaFacebookSquare } from "react-icons/fa";
-
-import { FaInstagram } from "react-icons/fa";
-
-import { FaTwitter } from "react-icons/fa";
-
-import { FaGoogle } from "react-icons/fa"
 
 import { FiMail } from "react-icons/fi";
 
 import { FiLock } from "react-icons/fi";
 
-
-
-import backgroundImg from "../../assets/background.png"
-
 const Login = () => {
     return(
         <div className="container">
-            <img src={backgroundImg} alt="background"/>
-            <header>
-                <div className="logo">
-                    <FaCamera size={22}/>
-                    <h1> FancyGallery </h1>
-                </div>
-                <div className="social-media">
-                    <FaFacebookSquare size={22}/>
-                    <FaInstagram size={22}/>
-                    <FaTwitter size={22}/>
-                </div>
-            </header>
+            <Header/>
             <section>
-                <div className="upper-div">
-                    <h3> Log in </h3>
-                    <div className="miniSocial">
-                        <FaFacebookSquare size={18}/>
-                        <FaTwitter size={18}/>
-                        <FaGoogle size={18}/>
-                    </div>
-                </div>
+                <LoginFloatBox/>
                 <div className="bottom-div">
                     <form>
                         <div className="inputs">
@@ -73,9 +47,7 @@ const Login = () => {
                     </form>
                 </div>
             </section>
-            <footer>
-                <p> &#169; Made by Ezequiel Fonseca </p>
-            </footer>
+            <Footer/>
         </div>
     )
 }
