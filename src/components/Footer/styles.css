@@ -1,10 +1,12 @@
 footer{
-    border: dotted 2px firebrick;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 5%;
+    border: dotted 3px purple;
     padding: 20px;
-    text-align: right;
-    position: absolute;
+    position: static;
     bottom:0;
     width: 100%;
-    left: 0;
     filter: drop-shadow( 3px 3px 3px #000000);
 }
