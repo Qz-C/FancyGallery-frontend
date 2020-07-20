@@ -8,7 +8,7 @@ html{
 }
 
 .container{
-    border: forestgreen dotted 2px;
+    border: dotted yellow 2px;
     position: absolute;
     width: 100%;
     height: 100%; 
@@ -16,16 +16,18 @@ html{
 }
 
 .container section{
+    background-color: maroon;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: 90%;
-    border: dotted 2px red;
+    border: dotted 3px green;
 }
 
 .container section .bottom-div{
-    
+
     padding: 40px;
     width: 365px;
     height: 550px;
