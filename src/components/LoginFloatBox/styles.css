@@ -1,8 +1,8 @@
 .login-float-box{
     box-shadow: black 3px 3px 10px;
     background-image: linear-gradient(to right, #4D0025, #A520B0 );
-    width: 320px;
-    height: 180px;
+    min-width: 320px !important;
+    min-height: 180px !important;
     border-radius: 10px;
     border: none;
     display: flex;

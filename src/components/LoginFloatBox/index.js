@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import api from '../../services/api'
 
 import './styles.css';
 
@@ -6,8 +8,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 
 import { FaTwitter } from "react-icons/fa";
 
-import { FaGoogle } from "react-icons/fa"
-
+import { FaGoogle } from "react-icons/fa";
 
 const LoginFloatBox = () => (
     <div className="login-float-box">
