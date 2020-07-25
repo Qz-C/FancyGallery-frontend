@@ -1,7 +1,6 @@
 header{
     position: static;
     height: 5%;
-    border: dotted black 3px;
     width: 100%;
     display: flex;
     justify-content: space-between;

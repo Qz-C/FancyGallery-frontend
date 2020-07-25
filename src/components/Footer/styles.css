@@ -3,7 +3,6 @@ footer{
     align-items: center;
     justify-content: flex-end;
     height: 5%;
-    border: dotted 3px purple;
     padding: 20px;
     position: static;
     bottom:0;
