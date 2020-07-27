@@ -14,35 +14,48 @@ import { FiMail } from "react-icons/fi";
 
 import { FiLock } from "react-icons/fi";
 
-import api from "../../services/api"
-
-
+import api from "../../services/api";
 
 const Login = () => {
 
+    const [loginError, setLoginError] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
-    
-    const renderError = err => (
-        <p> {err} </p>
-    );
 
     const handleLogin = async event =>{
         event.preventDefault();
 
-        try{
-            await api.post('/user/authenticate', {
-                email: email,
-                password: password
-            }).then( response => {
-                console.log(response.data.token);
-            })
 
-        }catch(err){
-            alert(err);
-            renderError(err); 
-        }
-        
+        await api.post('/user/authenticate', {
+            email: email,
+            password: password
+        }).then( response => {
+            setLoginError(" ");
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.headers);
+            console.log(response.config);
+
+        }).catch(error => {
+            if(error.response)
+            {
+                switch(error.response.status)
+                {
+                    
+                    case 400: console.log(error.response.data.error);
+                               setLoginError(error.response.data.error);
+                               break;
+                    case 401: console.log(error.response.data.error);
+                                setLoginError(error.response.data.error);
+                                break;
+                    default: break;
+                }
+            }else if(error.request)
+                setLoginError("Server unreachable, try again later");
+            
+            
+        });
     }
 
     return(
@@ -67,7 +80,9 @@ const Login = () => {
                                 placeholder="Passwrod..."
                             />
                         </div>
-                        
+                        <div className="error-message">
+                            {loginError}
+                        </div>
                         <div className="buttons">
                             <button type="submit" className="button" >
                                 Log in
