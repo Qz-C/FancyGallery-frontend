@@ -37,6 +37,7 @@ button:hover{
 }
 
 input{
+    height: 32px;
     padding: 5px;
     border: none;
     width: 90%;
