@@ -1,0 +1,79 @@
+.loading{
+    display: flex;
+  }
+  
+  .loading .box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+  }
+  
+  @keyframes circle{
+    0%{
+      width:  0px;
+      height: 0px;
+      background-color: rgba(156, 39, 176, .2);
+    }
+    25%{
+      width:  2px;
+      height: 2px;
+       background-color: rgba(156, 39, 176, .4);
+    }
+    50%{
+      width:  4px;
+      height: 4px;
+       background-color: rgba(156, 39, 176, .6);
+    }
+    75%{
+      width:  6px;
+      height: 6px;
+       background-color: rgba(156, 39, 176, .8);
+    }
+    100%{
+      width:  8px;
+      height: 8px;
+      background-color: rgba(156, 39, 176, 1);
+  
+    }
+  }
+  
+   .loading .box .circle1{
+    background-color: rgb(156, 39, 176);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation-name: circle;
+    animation-duration: 400ms;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+  
+  .loading .box .circle2{
+    background-color: rgb(156, 39, 176);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation-name: circle;
+    animation-duration: 400ms;
+    animation-delay: 400ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+  .loading .box .circle3{
+    background-color: rgb(156, 39, 176);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation-name: circle;
+    animation-duration: 400ms;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+  
