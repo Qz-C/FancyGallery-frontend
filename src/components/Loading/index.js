@@ -2,18 +2,18 @@ import React from 'react';
 
 import './styles.css'
 
-const Loading = (on) => {
+const Loading = (props) => {
 
-    const hidden = on;
+    const hidden = props.hidden;
 
     const handleLoading = action => {
 
         const divElement = document.querySelector(".loading");
 
         if(action === false)
-            divElement.style.display("none");
+            divElement.style.display = "none";
         else
-            divElement.style.display("block");     
+            divElement.style.display = "block";     
     }
 
     return(

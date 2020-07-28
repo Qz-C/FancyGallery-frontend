@@ -16,20 +16,24 @@ import { FiLock } from "react-icons/fi";
 
 import api from "../../services/api";
 
+import Loading from "../../components/Loading";
+
 const Login = () => {
 
     const [loginError, setLoginError] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const [ showLoading, setShowLoading] = useState(false);
 
     const handleLogin = async event =>{
         event.preventDefault();
 
-
+        setShowLoading(true);
         await api.post('/user/authenticate', {
             email: email,
             password: password
         }).then( response => {
+            setShowLoading(false);
             setLoginError(" ");
             console.log(response.data);
             console.log(response.status);
@@ -38,6 +42,7 @@ const Login = () => {
             console.log(response.config);
 
         }).catch(error => {
+            setShowLoading(false);
             if(error.response)
             {
                 switch(error.response.status)
@@ -82,6 +87,7 @@ const Login = () => {
                         </div>
                         <div className="error-message">
                             {loginError}
+                            <Loading hidden={showLoading}/>
                         </div>
                         <div className="buttons">
                             <button type="submit" className="button" >
