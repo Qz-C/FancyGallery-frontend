@@ -20,26 +20,25 @@ import Loading from "../../components/Loading";
 
 const Login = () => {
 
+
     const [loginError, setLoginError] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ showLoading, setShowLoading] = useState(false);
 
     const handleLogin = async event =>{
-        event.preventDefault();
 
         setShowLoading(true);
+
+        event.preventDefault();
+
         await api.post('/user/authenticate', {
             email: email,
             password: password
         }).then( response => {
             setShowLoading(false);
             setLoginError(" ");
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers);
-            console.log(response.config);
+            //redirect here
 
         }).catch(error => {
             setShowLoading(false);
@@ -58,9 +57,15 @@ const Login = () => {
                 }
             }else if(error.request)
                 setLoginError("Server unreachable, try again later");
-            
-            
         });
+    }
+
+    const clearForm = event => {
+        if( loginError !== "" )
+        {
+            setLoginError("");
+            document.getElementById("form").reset();
+        }
     }
 
     return(
@@ -69,7 +74,7 @@ const Login = () => {
             <section>
                 <LoginFloatBox/>
                 <div className="bottom-div">
-                    <form onSubmit={handleLogin}>
+                    <form id="form" onSubmit={handleLogin} onClick={clearForm}>
                         <div className="inputs">
                             <FiMail size={24} color={'#A520B0'}/>
                             <input onChange={event => setEmail(event.target.value)}
@@ -86,8 +91,9 @@ const Login = () => {
                             />
                         </div>
                         <div className="error-message">
-                            {loginError}
-                            <Loading hidden={showLoading}/>
+                            {/* Show the component if the state is true */}
+                            { showLoading && <Loading/> }
+                            { loginError }
                         </div>
                         <div className="buttons">
                             <button type="submit" className="button" >
