@@ -50,11 +50,19 @@ html{
     justify-content: space-between;
 }
 
+.container section .bottom-div form .error-message{
+    color: #9C27B0;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    height: 60px;
+    filter: drop-shadow( 0.5px 0.5px 3px rgba( 0,0,0,0.3 ));
+}
+
 .container section .bottom-div form .buttons{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
 }
 
 .container section .bottom-div form .buttons .button{
