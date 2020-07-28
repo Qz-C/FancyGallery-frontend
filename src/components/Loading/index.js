@@ -2,22 +2,10 @@ import React from 'react';
 
 import './styles.css'
 
-const Loading = (props) => {
-
-    const hidden = props.hidden;
-
-    const handleLoading = action => {
-
-        const divElement = document.querySelector(".loading");
-
-        if(action === false)
-            divElement.style.display = "none";
-        else
-            divElement.style.display = "block";     
-    }
+const Loading = () => {
 
     return(
-        <div className="loading" onLoad={handleLoading(hidden)}>
+        <div className="loading">
             <div className="box">
                 <div className="circle1"></div>
             </div>
