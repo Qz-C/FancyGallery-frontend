@@ -18,6 +18,8 @@ import api from "../../services/api";
 
 import Loading from "../../components/Loading";
 
+import { Link } from "react-router-dom"
+
 const Login = () => {
 
 
@@ -99,9 +101,12 @@ const Login = () => {
                             <button type="submit" className="button" >
                                 Log in
                             </button>
-                            <button className="button" >
-                                Sign Up
+                            <button>
+                                <Link className="button" to="register" >
+                                    Sign Up
+                                </Link>
                             </button>
+                            
                         </div>
                     </form>
                 </div>

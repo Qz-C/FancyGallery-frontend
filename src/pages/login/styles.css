@@ -68,3 +68,8 @@ html{
 .container section .bottom-div form .buttons .button{
     margin-bottom: 15px;
 }
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+  }
