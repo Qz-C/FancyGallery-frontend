@@ -58,3 +58,8 @@ input::placeholder{
     color: #FFFFFF;
     font-size: 14px;
 }
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+  }
