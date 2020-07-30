@@ -102,7 +102,7 @@ const Login = () => {
                                 Log in
                             </button>
                             <button>
-                                <Link className="button" to="register" >
+                                <Link className="button" to="/register" >
                                     Sign Up
                                 </Link>
                             </button>
