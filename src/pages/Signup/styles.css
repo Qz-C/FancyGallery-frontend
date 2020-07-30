@@ -6,3 +6,52 @@
     border-radius: 10px;
 }
 
+.container section .bottom-div2 form{
+    margin-top: 80px;
+    display:flex;
+    flex-direction: column;
+}
+
+.container section .bottom-div2 form div svg{
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.container section .bottom-div2 form .render-messages{
+    font-size: 12px;
+    height: 50px;
+    display: grid;
+}
+
+.container section .bottom-div2 form .inputs{
+    margin-top: 50px;
+    display: flex;
+    font-weight: 100%;
+    justify-content: space-between;
+}
+
+.container section .bottom-div2 form .start{
+    height: 40px;
+    margin-top: 40px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container section .bottom-div2 form .start p{
+    width: 130px;
+    color: #9C27B0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    filter: drop-shadow( 1px 1px 3px #000000);
+    transition: all 300ms;
+    
+}
+.container section .bottom-div2 form .start p:hover{
+
+    font-size: 18px;
+    filter: drop-shadow( 2px 2px 5px #000000)
+
+}
+
