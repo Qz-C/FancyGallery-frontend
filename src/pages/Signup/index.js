@@ -16,6 +16,8 @@ import { Link } from "react-router-dom"
 
 import ValidatingPasswordMessages from "../../components/ValidatingPasswordMessages"
 
+import ValidatingPasswordConfirmation from "../../components/ValidatingPasswordConfimation";
+
 import "./styles.css";
 
 const Signup = () => {
@@ -29,7 +31,9 @@ const Signup = () => {
     const [ lower, setLower ] = useState(false);
     const [ upper, setUpper ] = useState(false);
     const [ special, setSpecial ] = useState(false);
-    const [ showValidatePasswordMessage, setShowValidatePasswordMessage] = useState(false)
+    const [ showValidatePasswordMessage, setShowValidatePasswordMessage] = useState(false);
+    const [ passwordMatched, setpasswordMatched ] = useState(false);
+    const [ showPassWordMatches, setShowPassWordMatches ] = useState(false);
 
     const hasLowerCase = str => {
         return (/[a-z]/.test(str));
@@ -89,10 +93,22 @@ const Signup = () => {
         
         
     }
+
+    const handlePasswordConfirmation = event  => {
+        
+        setShowPassWordMatches(true);
+
+        const confirmPassword = event.target.value;
+            if(confirmPassword === password )
+                setpasswordMatched(true);
+            else
+                setpasswordMatched(false);
+    }
     
     const handleSignup = event => {
         event.preventDefault();
     }
+
 
     return(
         <div className="container">
@@ -123,10 +139,8 @@ const Signup = () => {
                                 type="password"
                                 placeholder="Passwrod..."
                             />
-                        </div>
-                      
-                        
-                        <div className="render-messages">
+
+                            </div> <div className="render-messages">
 
                             { showValidatePasswordMessage && <ValidatingPasswordMessages 
                                 size={size}
@@ -139,11 +153,16 @@ const Signup = () => {
                         </div>
                         <div className="inputs">
                             <FiLock size={24} color={'#A520B0'} />
-                            <input onChange={event => setConfirmPasswrod(event.target.value)}
+                            <input onChange={handlePasswordConfirmation}
                                 type="password"
                                 placeholder="Confirm Passwrod..."
                             />
                         </div>
+
+                        { showPassWordMatches && <ValidatingPasswordConfirmation 
+                                matched={passwordMatched}
+                            />}
+
                         <Link className="start" type="submit" to="#">
                             <p>GET STARTED</p>
                         </Link>
