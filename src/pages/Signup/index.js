@@ -25,14 +25,14 @@ const Signup = () => {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ name, setName ] = useState("");
-    const [ confirmPassword, setConfirmPasswrod ] = useState("");
+    const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ size, setSize ] = useState(false);
     const [ number, setNumber ] = useState(false);
     const [ lower, setLower ] = useState(false);
     const [ upper, setUpper ] = useState(false);
     const [ special, setSpecial ] = useState(false);
     const [ showValidatePasswordMessage, setShowValidatePasswordMessage] = useState(false);
-    const [ passwordMatched, setpasswordMatched ] = useState(false);
+    const [ passwordMatched, setPasswordMatched ] = useState(false);
     const [ showPassWordMatches, setShowPassWordMatches ] = useState(false);
 
     const hasLowerCase = str => {
@@ -87,8 +87,7 @@ const Signup = () => {
         if( size && number && lower && upper && special )
         {
             setPassword(validatingPassword);
-            console.log(password)
-            
+            console.log(password) 
         }
         
         
@@ -99,14 +98,19 @@ const Signup = () => {
         setShowPassWordMatches(true);
 
         const confirmPassword = event.target.value;
-            if(confirmPassword === password )
-                setpasswordMatched(true);
+            if(confirmPassword === password && password != "")
+                setPasswordMatched(true);
             else
-                setpasswordMatched(false);
+                setPasswordMatched(false);
+    }
+
+    const handleClick = event => {
+        console.log(event);
     }
     
     const handleSignup = event => {
         event.preventDefault();
+        console.log(event);
     }
 
 
@@ -116,10 +120,10 @@ const Signup = () => {
             <section>
                 <LoginFloatBox/>
                 <div className="bottom-div2">
-                    <form id="form" onSubmit={handleSignup}>
+                    <form id="form" onSubmit={handleSignup} >
                         <div className="inputs">
                             <FiUser size={24} color={'#A520B0'}/>
-                            <input onChange={event => setName(event.target.value)}
+                            <input onChange={event => setName(event.target.value)} onFocus={handleClick}
                                 type="name"
                                 placeholder="Name..."
                             />
@@ -127,7 +131,7 @@ const Signup = () => {
 
                         <div className="inputs">
                             <FiMail size={24} color={'#A520B0'} />
-                            <input onChange={event => setEmail(event.target.value)}
+                            <input onChange={event => setEmail(event.target.value)} onFocus={handleClick}
                                 type="email"
                                 placeholder="Email..."
                             />
@@ -137,7 +141,7 @@ const Signup = () => {
                             <FiLock size={24} color={'#A520B0'} />
                             <input onChange={handlePasswordValidation}
                                 type="password"
-                                placeholder="Passwrod..."
+                                placeholder="Password..."
                             />
 
                             </div> <div className="render-messages">
@@ -155,7 +159,7 @@ const Signup = () => {
                             <FiLock size={24} color={'#A520B0'} />
                             <input onChange={handlePasswordConfirmation}
                                 type="password"
-                                placeholder="Confirm Passwrod..."
+                                placeholder="Confirm Password..."
                             />
                         </div>
 
