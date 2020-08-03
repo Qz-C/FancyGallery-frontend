@@ -9,7 +9,7 @@ import "./styles.css";
 const ValidatingPasswordMessages = props => {
     console.log(props);
     return(
-        <div className="message-box">
+        <div className="message-box1">
             <div className="double-row">
                 <div className="message" >
                     <div> { !props.size && <FiX color={"red"} size={12}/>} 
