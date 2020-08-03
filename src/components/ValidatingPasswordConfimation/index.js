@@ -15,7 +15,7 @@ const ValidatingPasswordConfirmation = props => {
                 <div> { !props.matched && <FiX color={"red"} size={12}/>} 
                       { props.matched && <FiCheck color={"green"} size={12}/>} 
                 </div>
-                <p> Password must matches </p>
+                <p> The password must match </p>
 
             </div>
         </div>

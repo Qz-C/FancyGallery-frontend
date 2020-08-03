@@ -1,6 +1,5 @@
 .message-box{
     font-size: 12px;
-    height: 50px;
     margin-top: 10px;
     box-shadow: black 3px 3px 10px;
     background-image: linear-gradient(to right, #4D0025, #A520B0 );
@@ -10,7 +9,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: teal;
 }
 
 .message-box svg{
