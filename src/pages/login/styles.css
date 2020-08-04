@@ -1,20 +1,11 @@
-html{
-    background:url("../../assets/background.png") no-repeat center center fixed;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size: cover;
-    background-size: cover;
-
-}
-
-.container{
+.container-login{
     position: absolute;
     width: 100%;
     height: 100%; 
     color: #FFFFFF;
 }
 
-.container section{
+.container-login section{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +14,7 @@ html{
     height: 90%;
 }
 
-.container section .bottom-div{
+.container-login section .bottom-div{
 
     padding: 40px;
     width: 365px;
@@ -31,25 +22,25 @@ html{
     border-radius: 10px;
 }
 
-.container section .bottom-div form{
+.container-login section .bottom-div form{
     margin-top: 100px;
     display:flex;
     flex-direction: column;
 }
 
-.container section .bottom-div form div svg{
+.container-login section .bottom-div form div svg{
     margin-right: 5px;
     margin-top: 5px;
 }
 
-.container section .bottom-div form .inputs{
+.container-login section .bottom-div form .inputs{
     margin-top: 50px;
     display: flex;
     font-weight: 100%;
     justify-content: space-between;
 }
 
-.container section .bottom-div form .error-message{
+.container-login section .bottom-div form .error-message{
     color: #9C27B0;
     font-weight: bold;
     text-align: center;
@@ -58,13 +49,13 @@ html{
     filter: drop-shadow( 0.5px 0.5px 3px rgba( 0,0,0,0.3 ));
 }
 
-.container section .bottom-div form .buttons{
+.container-login section .bottom-div form .buttons{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.container section .bottom-div form .buttons .button{
+.container-login section .bottom-div form .buttons .button{
     margin-bottom: 15px;
 }
 
