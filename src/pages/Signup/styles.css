@@ -1,29 +1,45 @@
-.container section .bottom-div2{
+.container-signup{
+    position: absolute;
+    width: 100%;
+    height: 100%; 
+    color: #FFFFFF;
+}
+
+.container-signup section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+}
+
+.container-signup section .bottom-div{
     padding: 40px;
     width: 500px;
     background-color: rgb(255,255,255,0.7);
     border-radius: 10px;
 }
 
-.container section .bottom-div2 form{
+.container-signup section .bottom-div form{
     margin-top: 80px;
     display:flex;
     flex-direction: column;
 }
 
-.container section .bottom-div2 form div svg{
+.container-signup section .bottom-div form div svg{
     margin-right: 5px;
     margin-top: 5px;
 }
 
-.container section .bottom-div2 form .inputs{
+.container-signup section .bottom-div form .inputs{
     margin-top: 50px;
     display: flex;
     font-weight: 100%;
     justify-content: space-between;
 }
 
-.container section .bottom-div2 form .start{
+.container-signup section .bottom-div form .start{
     height: 40px;
     margin-top: 40px;
     padding: 10px;
@@ -31,20 +47,9 @@
     align-items: center;
     justify-content: center;
 }
-.container section .bottom-div2 form .start p{
-    width: 130px;
-    color: #9C27B0;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    filter: drop-shadow( 1px 1px 3px #000000);
-    transition: all 300ms;
-    
+
+.container-signup section .bottom-div form .start button:disabled{
+    color: white;
+    background-color: rgb(202, 201, 201);
+    box-shadow: black 3px 3px 10px;
 }
-.container section .bottom-div2 form .start p:hover{
-
-    font-size: 18px;
-    filter: drop-shadow( 2px 2px 5px #000000)
-
-}
-
