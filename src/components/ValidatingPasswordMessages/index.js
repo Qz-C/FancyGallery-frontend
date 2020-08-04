@@ -7,7 +7,6 @@ import { FiX } from "react-icons/fi";
 import "./styles.css";
 
 const ValidatingPasswordMessages = props => {
-    console.log(props);
     return(
         <div className="message-box1">
             <div className="double-row">
