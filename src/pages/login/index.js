@@ -18,15 +18,19 @@ import api from "../../services/api";
 
 import Loading from "../../components/Loading";
 
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
+
+import cookie from "../../services/cookies"
 
 const Login = () => {
 
 
-    const [loginError, setLoginError] = useState("");
+    const [ loginError, setLoginError] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ showLoading, setShowLoading] = useState(false);
+
+    const history = useHistory();
 
     const handleLogin = async event =>{
 
@@ -35,12 +39,16 @@ const Login = () => {
         event.preventDefault();
 
         await api.post('/user/authenticate', {
-            email: email,
+            email: email.toLowerCase(),
             password: password
         }).then( response => {
             setShowLoading(false);
             setLoginError(" ");
-            //redirect here
+
+            cookie.setCookie("token", response.data.token, 10*365);
+            
+            history.push('/profile');
+
 
         }).catch(error => {
             setShowLoading(false);
@@ -71,7 +79,7 @@ const Login = () => {
     }
 
     return(
-        <div className="container">
+        <div className="container-login">
             <Header/>
             <section>
                 <LoginFloatBox/>
