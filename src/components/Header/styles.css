@@ -1,4 +1,4 @@
-header{
+.header{
     position: static;
     height: 5%;
     width: 100%;
@@ -7,23 +7,23 @@ header{
     align-items: center;
     padding: 20px;
 }
-header .logo{
+.header .logo{
     display: flex;
     align-items: center;
 }
 
-header .logo svg{
+.header .logo svg{
     filter: drop-shadow( 3px 3px 3px #000000);
     margin-right: 5px;
 }
 
-header .logo h1{
+.header .logo h1{
     font-size: 24px;
     font-weight: bold;
     filter: drop-shadow( 3px 3px 3px #000000);
 }
 
-header .social-media svg{
+.header .social-media svg{
     margin-right: 10px;
     filter: drop-shadow( 3px 3px 3px #000000);
 }

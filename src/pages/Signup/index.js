@@ -263,7 +263,7 @@ const Signup = () => {
             password: password
         }).then (response => {
 
-                document.cookie = `token = ${response.data.token}`
+                cookie.setCookie("token", response.data.token, 10*365);
 
                 history.push('/profile');
 
