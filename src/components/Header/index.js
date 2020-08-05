@@ -12,7 +12,7 @@ import { FaTwitter } from "react-icons/fa";
 
 
 const Header = () => (
-        <header>
+        <header className="header"> 
             <div className="logo">
                 <FaCamera size={22}/>
                 <h1> FancyGallery </h1>
