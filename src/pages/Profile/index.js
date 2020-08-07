@@ -6,59 +6,91 @@ import '../../global.css';
 
 import api from "../../services/api"
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import cookie from "../../services/cookies"
 
-import HeaderProfile from "../../components/HeaderProfile"
+import HeaderProfile from "../../components/HeaderProfile";
  
 const Profile = () => {
 
+    const SERVER_BASE_URL = 'http://localhost:3333/'
+
     const history = useHistory();
     const [token, setToken] = useState("");
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState();
     const [pictures, setPictures] = useState([]);
+    const [count, setCount] = useState(0);
+
 
     const checkToken = async () => {
 
-        const token = cookie.getCookie("token");
+        const localToken = cookie.getCookie("token");
 
-        if( token === "")
+        if( localToken === "")
             history.push('/');
 
         await api.get('/user/get', {
             headers: {
-                Authorization : `Bearer ${token}`}
+                Authorization : `Bearer ${localToken}`}
             }).then ( response => {
-                setToken(token);
+                setToken(localToken);
                 setUser(response.data);
             }).catch( () => {
                 history.push('/');
             })
+            loadImgs(localToken);
         }
 
         useEffect( () => {
-            if( user.length === 0 )
-                window.onload=checkToken;
-        })
+            if( user === undefined )
+            {
+                checkToken();
+                console.log("Executou");
+            }
+            console.log("Effect");
+                
+        }, [user]);
 
-        const LoadImgs = async ()=> {
+        //useEffect ( () => {
+            
+        //}, [count])
+
+        const loadImgs = async (token) => { 
             await api.get('/img/list', {
                 headers: {
                     Authorization : `Bearer ${token}`}
                 }).then ( response => {
                     setPictures(response.data);
-                    console.log(response.data);
+                }).catch (error => {
+                    console.log(error)
                 })
+        }
+
+        const controlLoop = () => {
+            count < 7 ? setCount(count+1):setCount(0)
         }
         
     return(
 
-        <div id="container-profile" onClick={LoadImgs}>
-            <HeaderProfile name={user.name}/>
+        <div id="container-profile">
+            { user && <HeaderProfile name={user.name}/>}
             <main className="gallery">
-                {token}
-
+                {pictures.map(picture => {
+                        const imgStyle = {
+                            background:`(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
+                        }
+                        
+                        //setCount(count+1)
+                       
+                        return(
+                            <Link className="link-box"to="#" key={picture.id}>
+                                <div className={`img${count}`} style={imgStyle}>
+                                </div>
+                            </Link>
+                        )
+                    })
+                }
             </main>
         </div>
     )

@@ -19,12 +19,12 @@ const HeaderProfile = props => (
             <div className="user-nav">
                 <div className="user-name"> 
                     <h1> Hello, </h1>  
-                    <Link className="link-name"> {props.name} </Link>
+                    <Link className="link-name" to="#"> {props.name} </Link>
                 </div>
-                <Link>
+                <Link to="#">
                     <button className="link-button">  Upload  </button>
                 </Link>
-                <Link className="sign-out">  
+                <Link className="sign-out" to="#">  
                     <FiLogOut size={30}/>
                 </Link>
                 
