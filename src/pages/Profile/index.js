@@ -17,80 +17,62 @@ const Profile = () => {
     const SERVER_BASE_URL = 'http://localhost:3333/'
 
     const history = useHistory();
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState(cookie.getCookie("token"));
     const [user, setUser] = useState();
     const [pictures, setPictures] = useState([]);
     const [count, setCount] = useState(0);
 
-
-    const checkToken = async () => {
-
-        const localToken = cookie.getCookie("token");
-
-        if( localToken === "")
+    useEffect( () => {
+        if( token === "")
             history.push('/');
 
-        await api.get('/user/get', {
+        api.get('/user/get', {
             headers: {
-                Authorization : `Bearer ${localToken}`}
+            Authorization : `Bearer ${token}`}
+        }).then ( response => {
+            setToken(token);
+            setUser(response.data);
+        }).catch( () => {
+            history.push('/');
+        })
+        console.log("user rodou")
+    }, [token]);
+
+    useEffect ( () => {
+        api.get('/img/list', {
+            headers: {
+                Authorization : `Bearer ${token}`}
             }).then ( response => {
-                setToken(localToken);
-                setUser(response.data);
-            }).catch( () => {
-                history.push('/');
+                setPictures(response.data);
+            }).catch (error => {
+                console.log(error)
             })
-            loadImgs(localToken);
-        }
+            console.log("img rodou");
+        }, []);
 
-        useEffect( () => {
-            if( user === undefined )
-            {
-                checkToken();
-                console.log("Executou");
-            }
-            console.log("Effect");
-                
-        }, [user]);
-
-        //useEffect ( () => {
-            
-        //}, [count])
-
-        const loadImgs = async (token) => { 
-            await api.get('/img/list', {
-                headers: {
-                    Authorization : `Bearer ${token}`}
-                }).then ( response => {
-                    setPictures(response.data);
-                }).catch (error => {
-                    console.log(error)
-                })
-        }
-
-        const controlLoop = () => {
-            count < 7 ? setCount(count+1):setCount(0)
-        }
-        
+    const loop = () => {
+        if(count >= 7)
+            setCount(0)
+        else
+            setCount(count + 1)
+    }
+    
     return(
 
         <div id="container-profile">
             { user && <HeaderProfile name={user.name}/>}
             <main className="gallery">
-                {pictures.map(picture => {
-                        const imgStyle = {
-                            background:`(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
-                        }
-                        
-                        //setCount(count+1)
-                       
+                {pictures.map((picture, index ) => {
                         return(
-                            <Link className="link-box"to="#" key={picture.id}>
-                                <div className={`img${count}`} style={imgStyle}>
-                                </div>
+                            <Link className="link" to="#" key={picture.id}>
+                               <img 
+                                    className="img"
+                                    src={`${SERVER_BASE_URL}${user.email}/${picture.name}`}
+                                    alt={picture.name}
+                               />
                             </Link>
                         )
-                    })
-                }
+                })}
             </main>
         </div>
     )
