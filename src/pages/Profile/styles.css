@@ -7,7 +7,19 @@ html body #container-profile{
 }
 
 .gallery{
-    width: 100%;
+    border: 2px red solid;
+    position: absolute;
     height: 100%;
-    background-color: aqua;
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.gallery .link{
+    width: 100%;
+    height: 100% ;
+}
+
+.gallery .link .img{
+    height: 100%;
 }
