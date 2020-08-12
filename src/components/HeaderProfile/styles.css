@@ -1,6 +1,5 @@
 .header-profile{
-    position: fixed;
-    z-index: 10;
+    position: static;
     width: 100%;
     display: flex;
     justify-content: space-between;
