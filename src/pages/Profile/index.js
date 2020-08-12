@@ -21,6 +21,7 @@ const Profile = () => {
     const [user, setUser] = useState();
     const [pictures, setPictures] = useState([]);
     const [count, setCount] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect( () => {
         if( token === "")
@@ -39,37 +40,34 @@ const Profile = () => {
     }, [token]);
 
     useEffect ( () => {
-        api.get('/img/list', {
+        api.get(`/img/list?page=${page}`, {
             headers: {
                 Authorization : `Bearer ${token}`}
             }).then ( response => {
-                setPictures(response.data);
+                setPictures(response.data.imgList);
+                console.log(response.data);
             }).catch (error => {
                 console.log(error)
             })
             console.log("img rodou");
-        }, []);
-
-    const loop = () => {
-        if(count >= 7)
-            setCount(0)
-        else
-            setCount(count + 1)
-    }
-    
+        }, [page]);
+        
     return(
 
         <div id="container-profile">
             { user && <HeaderProfile name={user.name}/>}
             <main className="gallery">
-                {pictures.map((picture, index ) => {
+                {pictures.map(picture => {
+
+                        const img = {
+                            background:`url(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
+                        } 
+
                         return(
-                            <Link className="link" to="#" key={picture.id}>
-                               <img 
-                                    className="img"
-                                    src={`${SERVER_BASE_URL}${user.email}/${picture.name}`}
-                                    alt={picture.name}
-                               />
+                            <Link style={img} className="link" to="#" key={picture.id}>
+                               <div className="img">
+
+                               </div>
                             </Link>
                         )
                 })}
@@ -78,4 +76,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default Profile; 
