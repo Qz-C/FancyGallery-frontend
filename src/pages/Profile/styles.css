@@ -20,10 +20,10 @@ html body #container-profile{
 .gallery .link{
     width: 100%;
     height: 100%;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size: cover;
-    background-size: cover;
+    -webkit-background-size:contain !important;
+    -moz-background-size:contain !important;
+    -o-background-size: contain !important;
+    background-size: contain !important;
     box-shadow: black 5px 5px 10px;
     transition: all 900s !important;
 }
@@ -37,11 +37,4 @@ html body #container-profile{
 
 .gallery .link .img:hover{
     background-color: transparent;
-}
-
-.gallery .link:hover{
-    -webkit-background-size:contain !important;
-    -moz-background-size:contain !important;
-    -o-background-size: contain !important;
-    background-size: contain !important;
 }

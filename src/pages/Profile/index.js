@@ -20,9 +20,9 @@ const Profile = () => {
     const [token, setToken] = useState(cookie.getCookie("token"));
     const [user, setUser] = useState();
     const [pictures, setPictures] = useState([]);
-    const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
 
+    //On first load and logout
     useEffect( () => {
         if( token === "")
             history.push('/');
@@ -39,19 +39,20 @@ const Profile = () => {
         console.log("user rodou")
     }, [token]);
 
+    //Load the pictures
     useEffect ( () => {
         api.get(`/img/list?page=${page}`, {
             headers: {
                 Authorization : `Bearer ${token}`}
             }).then ( response => {
-                setPictures(response.data.imgList);
+                setPictures(...pictures, response.data.imgList);
                 console.log(response.data);
             }).catch (error => {
                 console.log(error)
             })
             console.log("img rodou");
         }, [page]);
-        
+
     return(
 
         <div id="container-profile">
