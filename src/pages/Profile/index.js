@@ -15,6 +15,8 @@ import cookie from "../../services/cookies"
 import HeaderProfile from "../../components/HeaderProfile";
 
 import Loading from "../../components/Loading"
+
+import Image from "../../pages/Image"
  
 const Profile = () => {
 
@@ -26,10 +28,10 @@ const Profile = () => {
     const [pictures, setPictures] = useState([]);
     const [page, setPage] = useState(1);
     const [keepShowingScroll , setKeepShowingScroll] = useState(true)
+    const [showImage, setShowImage] = useState(false)
 
     //On first load and logout
     useEffect( () => {
-        console.log("User running...")
         if( token === "")
             history.push('/');
 
@@ -42,35 +44,34 @@ const Profile = () => {
         }).catch( () => {
             history.push('/');
         })
-        console.log("User finished !!!")
     }, [token, history]);
 
     //Load the pictures
     useEffect ( () => {
-            
+            fetchData();
         },[]);
 
         //
         const fetchData = () => {
-                console.log()
                 api.get(`/img/list?page=${page}&items=${itemsPerPage}`, {
                 headers: {
                     Authorization : `Bearer ${token}`}
                 }).then ( response => {
-                    if(response.data !== [])
+                    if(response.data.length !== 0)
+                    
                     {
                         setPage(page+1);
                         setPictures([...pictures, ...response.data.imgList]);
-                        console.log(response.data);
-                    }else{
+                    }else
                         setKeepShowingScroll(false);
-                        console.log("Ñ mexi no pictures");
-                    }
-                        
-                        
+
                 }).catch (error => {
                     console.log(error)
                 })
+        }
+
+        const imagePopUp = event => {
+            console.log(event);
         }
 
     return(
@@ -78,26 +79,29 @@ const Profile = () => {
         <div id="container-profile">
             { user && <HeaderProfile name={user.name}/>}
             <InfiniteScroll 
-                dataLength={itemsPerPage}
+                dataLength={pictures.length}
+                loader={<Loading/>}
                 next={fetchData}
                 hasMore={ keepShowingScroll }
-                loader={<Loading/>}
-                endMessage={<h1>END !</h1>}
             >
-                
-                {console.log(keepShowingScroll)}
                 <main className="gallery">
-                    {pictures.map(picture => {
+                    {pictures.map( (picture) => {
 
+                            const url = `url(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
                             const img = {
-                                background:`url(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
+                                background:`${url}`
                             } 
 
                             return(
-                                <Link style={img} className="link" to="#" key={picture.id}>
-                                <div className="img">
-
-                                </div>
+                                <Link 
+                                    style={img} 
+                                    className="link"
+                                    to="#"
+                                    key={picture.id}
+                                    onClick={imagePopUp}
+                                >
+                                    <div className="img">
+                                    </div>
                                 </Link>
                             )
                     })}
