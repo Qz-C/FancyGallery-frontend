@@ -28,7 +28,8 @@ const Profile = () => {
     const [pictures, setPictures] = useState([]);
     const [page, setPage] = useState(1);
     const [keepShowingScroll , setKeepShowingScroll] = useState(true)
-    const [showImage, setShowImage] = useState(false)
+    const [showImage, setShowImage] = useState(false);
+    const [image, setImage] = useState({});
 
     //On first load and logout
     useEffect( () => {
@@ -70,8 +71,12 @@ const Profile = () => {
                 })
         }
 
-        const imagePopUp = event => {
-            console.log(event);
+        const imagePopUp = (picture, url) => {
+            setShowImage(true);
+            setImage({
+                name: picture.name,
+                url: url
+            })
         }
 
     return(
@@ -85,27 +90,32 @@ const Profile = () => {
                 hasMore={ keepShowingScroll }
             >
                 <main className="gallery">
-                    {pictures.map( (picture) => {
+                    {pictures.map( (picture,index) => {
 
-                            const url = `url(${SERVER_BASE_URL}${user.email}/${picture.name}) no-repeat center center`
+                            const url = `${SERVER_BASE_URL}${user.email}/${picture.name}`
                             const img = {
-                                background:`${url}`
+                                background:`url(${url}) no-repeat center center`
                             } 
 
                             return(
                                 <Link 
                                     style={img} 
                                     className="link"
+                                    id={`link-${index}`}
                                     to="#"
                                     key={picture.id}
-                                    onClick={imagePopUp}
+                                    onClick={() => imagePopUp(picture, url)}
                                 >
-                                    <div className="img">
+                                    <div className="img" 
+                                         id={`img-${index}`}>
                                     </div>
                                 </Link>
                             )
                     })}
                 </main>
+
+                {showImage && <Image url={image.url} name={image.name}/>}
+
             </InfiniteScroll>
         </div>
     )
