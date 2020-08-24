@@ -74,8 +74,13 @@ const Profile = () => {
         const imagePopUp = (picture, url) => {
             setShowImage(true);
             setImage({
+                id: picture.id,
                 name: picture.name,
-                url: url
+                url: url,
+                size: picture.size,
+                updated_at : picture.updated_at,
+                created_at : picture.created_at,
+                format: picture.format
             })
         }
 
@@ -101,7 +106,6 @@ const Profile = () => {
                                 <Link 
                                     style={img} 
                                     className="link"
-                                    id={`link-${index}`}
                                     to="#"
                                     key={picture.id}
                                     onClick={() => imagePopUp(picture, url)}
@@ -114,7 +118,12 @@ const Profile = () => {
                     })}
                 </main>
 
-                {showImage && <Image url={image.url} name={image.name}/>}
+                {showImage && <Image 
+                                image={image} 
+                                onClose={() => {setShowImage(false)} }
+                                token={token}
+                            />
+                }
 
             </InfiniteScroll>
         </div>

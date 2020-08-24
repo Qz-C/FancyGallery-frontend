@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./styles.css";
 
@@ -12,24 +12,101 @@ import {FiDownload} from "react-icons/fi"
 
 import {FiX} from "react-icons/fi"
 
+import {FiCheck} from "react-icons/fi"
+
 import { Link } from "react-router-dom";
 
+import api from "../../services/api"
+
 const Image = props => {
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [newName, setNewName] = useState("");
+
+    const handleEnableEditing = () => {
+        setIsEditing(true);
+        const textElement = document.getElementById("picture-name");
+        const divElement = document.getElementById("picture-name-content");
+        
+        textElement.contentEditable = true;
+        
+        divElement.style.backgroundColor = "#181818"
+        divElement.style.padding = "5px"
+        divElement.style.borderRadius = "10px"
+        divElement.style.border = "solid 1px #9C27B0"
+    }
+
+    const handleSaveNewName = () => {
+
+        console.log(`Bearer ${props.token}`);
+
+        const textElement = document.getElementById("picture-name");
+        const divElement = document.getElementById("picture-name-content");
+
+        textElement.contentEditable = false;
+
+        if(newName === "")
+            textElement.innerHTML = props.image.name;
+        else{
+            api.put(`/img/updatename?id=${props.image.id}`, {
+                data: {
+                    name : newName
+                },
+                headers: {
+                    Authorization : `Bearer ${props.token}`}
+                
+            }).then(response => {
+                console.log(response);
+            }).catch( error => {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            })
+        }
+
+        divElement.style.backgroundColor = "transparent"
+        divElement.style.padding = "0"
+        divElement.style.borderRadius = "0"
+        divElement.style.border = "none"
+        setIsEditing(false);
+
+    }
+
+
     return(
-        <div className="modal-container">
+      <div className="modal-container">
             <div className="modal">
-                <Link to="#">
-                    <FiX size={22} color={'white'}/> 
+                <Link to="#" className="close-button" onClick={props.onClose}>
+                    <FiX  onClick={props.onClose} size={22} color={'white'}/> 
                 </Link>
                 <section>
-                    <img src={props.url} alt={props.name}/>
+                    <img src={props.image.url} alt={props.image.name}/>
                     <div className="menu">
-                        <div>
-                            
-                        </div>
-                        <FiTrash2 size={22} color={'white'}/> 
-                        <FiDownload size={22} color={'white'}/> 
-                        
+                            <div id="picture-name-content">
+                                <h1 id="picture-name" contentEditable={false} onBlur={ event => {setNewName(event.target.value)}}>
+                                    {(props.image.name).split('.')[0]}
+                                </h1>
+
+                                { isEditing ? null : <Link to="#" onClick={ handleEnableEditing }>
+                                    <FiEdit2 size={16}/>
+                                </Link>}
+
+                                { isEditing ? <Link to="#" onClick={ handleSaveNewName }>
+                                    <FiCheck size={16}/>
+                                </Link> : null}
+                             
+                            </div>
+                            <h1>
+                                { (props.image.size/1024/1024).toFixed(2) } MB
+                            </h1>
+                            <h1>
+                                { (props.image.created_at).split('T')[0] }
+                            </h1>
+                            <h1>
+                                { (props.image.format).toUpperCase() }
+                            </h1>
+                            <FiTrash2 color={"#FFFFFF"} size={22}/>
+                            <FiDownload color={"FFFFFF"} size={22} />
                     </div>
                 </section>
             </div>
