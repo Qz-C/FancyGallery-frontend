@@ -35,7 +35,6 @@ const Profile = () => {
     useEffect( () => {
         if( token === "")
             history.push('/');
-
         api.get('/user/get', {
             headers: {
             Authorization : `Bearer ${token}`}
@@ -55,8 +54,8 @@ const Profile = () => {
         //
         const fetchData = () => {
                 api.get(`/img/list?page=${page}&items=${itemsPerPage}`, {
-                headers: {
-                    Authorization : `Bearer ${token}`}
+                    headers: {
+                        Authorization : `Bearer ${token}`}
                 }).then ( response => {
                     if(response.data.length !== 0)
                     

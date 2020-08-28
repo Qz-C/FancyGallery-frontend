@@ -18,10 +18,12 @@ import { Link } from "react-router-dom";
 
 import api from "../../services/api"
 
+
 const Image = props => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newName, setNewName] = useState("");
+
 
     const handleEnableEditing = () => {
         setIsEditing(true);
@@ -36,31 +38,28 @@ const Image = props => {
         divElement.style.border = "solid 1px #9C27B0"
     }
 
+    const hasSpace = str => {
+        return (/ /.test(str));
+    }
+
     const handleSaveNewName = () => {
 
-        console.log(`Bearer ${props.token}`);
+        console.log(` Na Imagem: Bearer ${props.token}`)
 
-        const textElement = document.getElementById("picture-name");
         const divElement = document.getElementById("picture-name-content");
-
-        textElement.contentEditable = false;
-
-        if(newName === "")
-            textElement.innerHTML = props.image.name;
-        else{
-            api.put(`/img/updatename?id=${props.image.id}`, {
-                data: {
-                    name : newName
-                },
+        
+        if(newName !== "" && !hasSpace(newName)){
+            api({
+                method: "put",
+                url: `/img/updatename?id=${props.image.id}`,
                 headers: {
-                    Authorization : `Bearer ${props.token}`}
-                
+                    Authorization : `Bearer ${props.token}`
+                },
+                data: {
+                    name: newName
+                }               
             }).then(response => {
-                console.log(response);
-            }).catch( error => {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
+                props.image.name = newName;
             })
         }
 
@@ -69,7 +68,18 @@ const Image = props => {
         divElement.style.borderRadius = "0"
         divElement.style.border = "none"
         setIsEditing(false);
+    }
 
+    const handleDownlodImg = () => {
+        api({
+            method: "get",
+            url: `/img/download?id=${props.image.id}`,
+            headers: {
+                Authorization : `Bearer ${props.token}`
+            }         
+        }).then(response => {
+            console.log(response.data);
+        })
     }
 
 
@@ -83,18 +93,28 @@ const Image = props => {
                     <img src={props.image.url} alt={props.image.name}/>
                     <div className="menu">
                             <div id="picture-name-content">
-                                <h1 id="picture-name" contentEditable={false} onBlur={ event => {setNewName(event.target.value)}}>
-                                    {(props.image.name).split('.')[0]}
-                                </h1>
+                                
+                                { isEditing ? null : <>
+                                    <h1 id="picture-name" contentEditable={false} onBlur={ event => {setNewName(event.target.value)}}>
+                                        { newName !== "" ? newName : (props.image.name).split('.')[0] }
+                                    </h1>
+                                    <Link to="#" onClick={ handleEnableEditing }>
+                                        <FiEdit2 size={16}/>
+                                    </Link>
+                                </>}
 
-                                { isEditing ? null : <Link to="#" onClick={ handleEnableEditing }>
-                                    <FiEdit2 size={16}/>
-                                </Link>}
+                                { isEditing ? <>
+                                    <input type="text" id="picture-name-editable"
+                                           onClick = { event => {event.preventDefault()}}
+                                           onChange={ event => {setNewName(event.target.value)}}
+                                           placeholder="New name"
+                                           autoComplete="off"
+                                    />
+                                    <Link to="#" onClick={ handleSaveNewName }>
+                                        <FiCheck size={16}/>
+                                    </Link>
+                                </> : null }
 
-                                { isEditing ? <Link to="#" onClick={ handleSaveNewName }>
-                                    <FiCheck size={16}/>
-                                </Link> : null}
-                             
                             </div>
                             <h1>
                                 { (props.image.size/1024/1024).toFixed(2) } MB
@@ -105,8 +125,14 @@ const Image = props => {
                             <h1>
                                 { (props.image.format).toUpperCase() }
                             </h1>
-                            <FiTrash2 color={"#FFFFFF"} size={22}/>
-                            <FiDownload color={"FFFFFF"} size={22} />
+                            <Link to="#" >
+                                <FiTrash2 color={"#FFFFFF"} size={22} />
+                            </Link>
+                            <Link to="#"  >
+                                <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
+                            </Link>
+                            
+                            
                     </div>
                 </section>
             </div>

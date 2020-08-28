@@ -19,6 +19,14 @@
     width: 80%;
 }
 
+.modal-container .modal .menu svg{
+    transition: all 300ms !important;
+}
+
+.modal-container .modal .menu svg:hover{
+    color: #9C27B0 !important;
+}
+
 .modal-container .modal .close-button{
     padding: 5px;
     display: flex;
@@ -65,10 +73,22 @@
     align-items: center;
     justify-content: space-between;
     transition: all 300ms;
+    width: auto;
 }
 
 .modal-container .modal section .menu #picture-name-content #picture-name{
+    transition: all 300ms;
     margin-right: 5px;
+}
+
+.modal-container .modal section .menu #picture-name-content #picture-name-editable{
+    all: unset;
     padding: 2px;
     transition: all 300ms;
+    background-color: none;
+    width: auto !important;
 }
+.modal-container .modal section .menu #picture-name-content #picture-name-editable::placeholder{
+    color: #363636;       
+}
+
