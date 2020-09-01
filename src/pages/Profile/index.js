@@ -70,7 +70,7 @@ const Profile = () => {
                 })
         }
 
-        const imagePopUp = (picture, url) => {
+        const imagePopUp = (picture, url, index) => {
             setShowImage(true);
             setImage({
                 id: picture.id,
@@ -79,8 +79,18 @@ const Profile = () => {
                 size: picture.size,
                 updated_at : picture.updated_at,
                 created_at : picture.created_at,
-                format: picture.format
+                format: picture.format,
+                index: index
             })
+        }
+
+        const deleteSingleimage = (index) => {
+            pictures.splice(index, 1);
+        }
+
+        const uploadOnDrop = event => {
+            event.preventDefault();
+
         }
 
     return(
@@ -93,8 +103,10 @@ const Profile = () => {
                 next={fetchData}
                 hasMore={ keepShowingScroll }
             >
-                <main className="gallery">
-                    {pictures.map( (picture,index) => {
+                <main className="gallery" 
+                      onDrop={uploadOnDrop}
+                      onDragOver={event => {event.preventDefault()}}>
+                    {pictures.map( (picture, index) => {
 
                             const url = `${SERVER_BASE_URL}${user.email}/${picture.name}`
                             const img = {
@@ -107,7 +119,7 @@ const Profile = () => {
                                     className="link"
                                     to="#"
                                     key={picture.id}
-                                    onClick={() => imagePopUp(picture, url)}
+                                    onClick={() => imagePopUp(picture, url, index)}
                                 >
                                     <div className="img" 
                                          id={`img-${index}`}>
@@ -121,6 +133,7 @@ const Profile = () => {
                                 image={image} 
                                 onClose={() => {setShowImage(false)} }
                                 token={token}
+                                deleteSingle={deleteSingleimage}
                             />
                 }
 

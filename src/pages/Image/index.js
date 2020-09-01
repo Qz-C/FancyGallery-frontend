@@ -76,9 +76,36 @@ const Image = props => {
             url: `/img/download?id=${props.image.id}`,
             headers: {
                 Authorization : `Bearer ${props.token}`
-            }         
+            } ,
+            //This option says that the response instead of a JSON, as default, will be a file.
+            responseType : "blob"     
         }).then(response => {
-            console.log(response.data);
+                    //It creates a reference to blob object in order to uses it in the DOM 
+                    const imgurl = window.URL.createObjectURL(response.data);
+                    //It creates a link element
+                    const img = document.createElement('a');
+                    //It attaches the blob object's reference into link
+                    img.href = imgurl;
+                    //It specifies that the image must be download with the provided name
+                    img.download = props.image.name;
+                    //It clicks on element in order to start the download process
+					img.click();
+            })
+    }
+
+    const handleDeleteImg = () => {
+        api({
+            method: "delete",
+            url: `/img/delete?id=${props.image.id}`,
+            headers: {
+                Authorization : `Bearer ${props.token}`
+            }
+        }).then(response => {
+            console.log(response.status);
+            props.onClose();
+            props.deleteSingle(props.image.index);
+        }).catch( error => {
+            console.log(error.status);
         })
     }
 
@@ -126,9 +153,9 @@ const Image = props => {
                                 { (props.image.format).toUpperCase() }
                             </h1>
                             <Link to="#" >
-                                <FiTrash2 color={"#FFFFFF"} size={22} />
+                                <FiTrash2 color={"#FFFFFF"} size={22} onClick={handleDeleteImg}/>
                             </Link>
-                            <Link to="#"  >
+                            <Link to="#" >
                                 <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
                             </Link>
                             
