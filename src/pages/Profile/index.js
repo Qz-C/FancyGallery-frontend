@@ -31,6 +31,7 @@ const Profile = () => {
     const [showImage, setShowImage] = useState(false);
     const [image, setImage] = useState({});
 
+
     //On first load and logout
     useEffect( () => {
         if( token === "")

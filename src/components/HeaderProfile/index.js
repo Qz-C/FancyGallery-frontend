@@ -28,7 +28,7 @@ const HeaderProfile = props => {
                     <Link to="#">
                         <button className="link-button"
                                 onClick={() => {setShowUpload(true)}}> 
-                                Upload  
+                                Upload 
                         </button>
                     </Link>
                     <Link className="sign-out" to="#">  

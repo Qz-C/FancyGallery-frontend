@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 
 import api from "../../services/api"
 
+import Modal from "../../components/Modal"
+
 
 const Image = props => {
 
@@ -111,12 +113,8 @@ const Image = props => {
 
 
     return(
-      <div className="modal-container">
-            <div className="modal">
-                <Link to="#" className="close-button" onClick={props.onClose}>
-                    <FiX  onClick={props.onClose} size={22} color={'white'}/> 
-                </Link>
-                <section>
+        <Modal onClose={props.onClose}>
+            <section className="img-content">
                     <img src={props.image.url} alt={props.image.name}/>
                     <div className="menu">
                             <div id="picture-name-content">
@@ -160,10 +158,10 @@ const Image = props => {
                             </Link>
                             
                             
-                    </div>
-                </section>
-            </div>
-        </div>
+                </div>
+            </section>
+        </Modal>
+            
     )
 }
 

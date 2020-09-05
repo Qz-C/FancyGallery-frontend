@@ -1,48 +1,12 @@
-.modal-container {
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, .5);
-    position:fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-container .modal{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 80%;
-    width: 80%;
-}
-
-.modal-container .modal .menu svg{
+.menu svg{
     transition: all 300ms !important;
 }
 
-.modal-container .modal .menu svg:hover{
+.menu svg:hover{
     color: #9C27B0 !important;
 }
 
-.modal-container .modal .close-button{
-    padding: 5px;
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-}
-
-.modal-container .modal .close-button svg:hover{
-    transition: all 300ms;
-}
-
-.modal-container .modal .close-button svg:hover{
-    background-color: #9C27B0;
-}
-
-.modal-container .modal section{
+.img-content{
     padding: 20px 20px 0px 20px;
     background-color: #202020;
     border-bottom-right-radius: 10px;
@@ -54,13 +18,13 @@
     align-items: center;
 }
 
-.modal-container .modal section img{
+.img-content img{
     box-shadow: black 0 0 5px;
     max-width: 100%;
     max-height: 70vh;
 }
 
-.modal-container .modal section .menu{
+.img-content .menu{
     display: flex;
     height: auto;
     width: 100%;
@@ -68,7 +32,7 @@
     justify-content: space-between;
 }
 
-.modal-container .modal section .menu #picture-name-content{
+.img-content .menu #picture-name-content{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -76,19 +40,19 @@
     width: auto;
 }
 
-.modal-container .modal section .menu #picture-name-content #picture-name{
+.img-content .menu #picture-name-content #picture-name{
     transition: all 300ms;
     margin-right: 5px;
 }
 
-.modal-container .modal section .menu #picture-name-content #picture-name-editable{
+.img-content .menu #picture-name-content #picture-name-editable{
     all: unset;
     padding: 2px;
     transition: all 300ms;
     background-color: none;
     width: auto !important;
 }
-.modal-container .modal section .menu #picture-name-content #picture-name-editable::placeholder{
+.img-content .menu #picture-name-content #picture-name-editable::placeholder{
     color: #363636;       
 }
 

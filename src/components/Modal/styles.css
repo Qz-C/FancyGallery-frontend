@@ -1,0 +1,35 @@
+.modal-container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+    position:fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container .modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80%;
+    max-width: 80rem;
+}
+
+.modal-container .modal .close-button{
+    padding: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.modal-container .modal .close-button svg:hover{
+    transition: all 300ms;
+}
+
+.modal-container .modal .close-button svg:hover{
+    background-color: #9C27B0;
+}

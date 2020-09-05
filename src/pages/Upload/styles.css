@@ -1,0 +1,26 @@
+.drop-zone{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #202020;
+    padding: 20px;
+    border-radius: 10px;
+    filter: drop-shadow( 0 0 10px #000000);
+    flex-direction: column;
+
+}
+
+.drop-zone #file-input {
+    padding:20px;
+    all: unset;
+    background-color: white;
+}
+
+.drop-zone #submit-input{
+    all: unset;
+}
+
+.drop-zone #file-input::-webkit-file-upload-button{
+    
+}
+
