@@ -9,17 +9,27 @@ import Modal from "../../components/Modal";
 const Upload = props => {
 
     const handleDrop = event => {
-        console.log(event);
+        event.preventDefault();
+        
+    }
+
+    const handleDragOver = event => {
+        event.preventDefault();
     }
 
     return(
         <Modal onClose={props.onClose}>
-            <div className="drop-zone" onDrop={handleDrop}>
+            <div className="drop-zone" 
+                 onDrop={handleDrop} 
+                 onDragOver={handleDragOver}>
                 <form id="upload-form">
-                    <p>Upload box</p>
-                    <input  type="file" id="file-input"/>
-                    <label class="button" for="file-input">formats supported .jpeg .png .gif</label>
-                    <input type="submit" id="submit-input"/>
+                    <p> Drop the images here </p>
+                    <input  type="file" 
+                            id="file-input" 
+                            multiple={true} 
+                            accept="image/jpeg image/gif image/png"/>
+                    <label class="button" for="file-input">Upload</label>
+                    <p className="supported"> supported: .gif .jpeg .png </p>
                 </form>
             </div>
         </Modal>
