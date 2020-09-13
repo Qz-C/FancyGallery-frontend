@@ -10,8 +10,6 @@ import {FiTrash2} from "react-icons/fi"
 
 import {FiDownload} from "react-icons/fi"
 
-import {FiX} from "react-icons/fi"
-
 import {FiCheck} from "react-icons/fi"
 
 import { Link } from "react-router-dom";
@@ -20,6 +18,7 @@ import api from "../../services/api"
 
 import Modal from "../../components/Modal"
 
+import filesize from "filesize"
 
 const Image = props => {
 
@@ -142,7 +141,7 @@ const Image = props => {
 
                             </div>
                             <h1>
-                                { (props.image.size/1024/1024).toFixed(2) } MB
+                                { filesize(props.image.size) } 
                             </h1>
                             <h1>
                                 { (props.image.created_at).split('T')[0] }

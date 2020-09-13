@@ -10,8 +10,11 @@ import { Link } from "react-router-dom"
 
 import Upload from "../../pages/Upload"
 
+import cookie from "../../services/cookies"
+
 const HeaderProfile = props => {
 
+        const [token, setToken] = useState(cookie.getCookie("token"));
         const [showUpload, setShowUpload] = useState(false);
 
         return(
@@ -35,7 +38,8 @@ const HeaderProfile = props => {
                         <FiLogOut size={30}/>
                     </Link>
                     { showUpload ? <Upload 
-                                    onClose={() => setShowUpload(false)} 
+                                    onClose={() => setShowUpload(false)}
+                                    token ={token} 
                                     /> : false
                     }
                     

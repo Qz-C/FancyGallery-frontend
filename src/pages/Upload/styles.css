@@ -43,3 +43,28 @@
 .drop-zone p{
     padding: 1em;
 }
+
+.dialog-upload li{
+    width: 100%;
+    padding: 2px;
+    list-style: none;
+    display: flex;
+}
+
+.dialog-upload li .text{
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.dialog-upload li .text p{
+    padding: 0;
+}
+
+.dialog-upload li img{
+    margin-right: 5px;
+    max-width: 40px;
+    max-height: 40px;
+}
+
