@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import "./styles.css"
 
@@ -62,7 +62,8 @@ const Upload = props => {
 
     const uploadFile = event => {
         event.preventDefault();
-        fileList.forEach( file =>{
+
+        setFileList(fileList.map( file =>{
             const Data = new FormData();
             Data.append('file', file.file);
             api({
@@ -71,19 +72,23 @@ const Upload = props => {
                 headers: {
                     Authorization : `Bearer ${props.token}`
                 },
-                data: Data,
-                onUploadProgress: ProgressEvent => {
-                    console.log(ProgressEvent);
-                }
+                data: Data
             }).then(response => {
                 console.log(response);
                 file.uploaded = true;
             }).catch(error => {
                 console.log(error);
                 file.uploaded = false;
+                file.error = true;
             })
-         })      
+            return(file)
+         }) 
+        )
     }
+
+    useEffect(() => {
+        console.log("Effect");
+    }, [fileList]);
 
     return(
         <Modal onClose={props.onClose}>
@@ -111,7 +116,6 @@ const Upload = props => {
                                     </strong>
                                     <p>{file.readableSize}</p>
                                </div>
-                                {console.log(file.uploaded)}
                                 { file.uploaded ? <FiCheck size={ 22 } color = {"green"}/> : <CircularProgressbar value={file.progress} text={`${file.progress}%`}/>}
                             </li>
                         ))}
