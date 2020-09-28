@@ -1,19 +1,11 @@
 import React, {useState, useEffect} from "react";
-
 import "./styles.css"
-
 import "../../global.css"
-
 import Modal from "../../components/Modal";
-
 import api from "../../services/api"
-
-import { CircularProgressbar } from "react-circular-progressbar"
-
-import {FiCheck} from "react-icons/fi"
-
 import filesize from "filesize"
-
+import FileList from "../../components/FileList"
+import {uniqueId} from "lodash"
 
 const Upload = props => {
 
@@ -40,6 +32,7 @@ const Upload = props => {
     const handleFiles = files => {
         const formated = files.map(file => (
             {
+                id: uniqueId(),
                 file: file,
                 name: file.name,
                 readableSize: filesize(file.size),
@@ -50,7 +43,6 @@ const Upload = props => {
             }))
 
         setFileList([...fileList, ...formated])
-
         const buttonElement = document.getElementById("upload-button");
         buttonElement.disabled = false;
     }
@@ -60,10 +52,17 @@ const Upload = props => {
         event.preventDefault();
     }
 
-    const uploadFile = event => {
-        event.preventDefault();
+    const updateFileList = (id, data) => {
+        setFileList({ fileList: fileList.map(file => {
+           return id === file.id ? 
+                { ...fileList, ...data } :
+                file;
+            })
+        })
+    }
 
-        setFileList(fileList.map( file =>{
+    const uploadFile = event => {
+        fileList.forEach( (file) =>{
             const Data = new FormData();
             Data.append('file', file.file);
             api({
@@ -72,23 +71,17 @@ const Upload = props => {
                 headers: {
                     Authorization : `Bearer ${props.token}`
                 },
-                data: Data
-            }).then(response => {
-                console.log(response);
-                file.uploaded = true;
-            }).catch(error => {
-                console.log(error);
-                file.uploaded = false;
-                file.error = true;
-            })
-            return(file)
-         }) 
-        )
-    }
+                data: Data,
+                onUploadProgress: event => {
+                    const progress = parseInt(Math.round( (event.loaded*100) / event.total));
 
-    useEffect(() => {
-        console.log("Effect");
-    }, [fileList]);
+                    updateFileList( file.id, {
+                        progress,
+                    })
+                }
+            })
+         })
+    }
 
     return(
         <Modal onClose={props.onClose}>
@@ -106,20 +99,7 @@ const Upload = props => {
                     />
                     <label className="button" for="file-input">Select files</label>
                     <p className="supported"> supported: .gif .jpeg .png </p>
-                    <div className="dialog-upload">
-                        {fileList.map((file, index) =>(
-                            <li key={index}>
-                                <img src={file.preview} alt={file.name}/>
-                                <div className="text">
-                                    <strong>
-                                        {file.name}
-                                    </strong>
-                                    <p>{file.readableSize}</p>
-                               </div>
-                                { file.uploaded ? <FiCheck size={ 22 } color = {"green"}/> : <CircularProgressbar value={file.progress} text={`${file.progress}%`}/>}
-                            </li>
-                        ))}
-                    </div>
+                    <FileList files={fileList}/>
                     <input id="upload-button" type="submit" disabled={true} className="button" value="Upload"/>
                 </form>
             </div>
