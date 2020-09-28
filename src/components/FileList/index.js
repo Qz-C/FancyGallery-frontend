@@ -10,8 +10,8 @@ const FileList = props => {
 
     return(
         <div className="dialog-upload">
-            {files.map((file, index) =>(
-                <li key={index}>
+            {files.map(file =>(
+                <li key={file.id}>
                     <img src={file.preview} alt={file.name}/>
                     <div className="text">
                             <strong>

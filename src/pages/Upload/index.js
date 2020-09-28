@@ -62,6 +62,7 @@ const Upload = props => {
     }
 
     const uploadFile = event => {
+        event.preventDefault();
         fileList.forEach( (file) =>{
             const Data = new FormData();
             Data.append('file', file.file);
@@ -77,8 +78,20 @@ const Upload = props => {
 
                     updateFileList( file.id, {
                         progress,
-                    })
+                    });
                 }
+            })
+            .then(response => {
+                updateFileList( file.id, {
+                    uploaded: true,
+                    error: false
+                })
+            })
+            .catch(error => {
+                updateFileList( file.id, {
+                    uploaded: false,
+                    error: true
+                })
             })
          })
     }
