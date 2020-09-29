@@ -92,14 +92,14 @@ const Upload = props => {
                         });
                     }
                 })
-                .then(response => {
+                .then(() => {
                     updateFileList({
                         id: file.id,
                         uploaded: true,
                     });
             
                 })
-                .catch(error => {
+                .catch(() => {
                     updateFileList({
                         id: file.id,
                         error: true,
