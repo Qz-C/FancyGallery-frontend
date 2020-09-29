@@ -3,20 +3,29 @@
     padding: 2px;
     list-style: none;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
-.dialog-upload li .text{
+.dialog-upload li .left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.dialog-upload li .left .text{
     display: flex; 
     flex-direction: column; 
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.dialog-upload li .text p{
+.dialog-upload li .left .text p{
     padding: 0;
 }
 
-.dialog-upload li img{
+.dialog-upload li .left img{
     margin-right: 5px;
     width: 40px;
     height: 40px;

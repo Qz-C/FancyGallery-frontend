@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "./styles.css"
 import "../../global.css"
 import Modal from "../../components/Modal";
@@ -72,36 +72,40 @@ const Upload = props => {
         event.preventDefault();
         fileList.forEach( (file) => {
             
-            const Data = new FormData();
-            Data.append('file', file.file);
-            api({
-                method:"post",
-                url: "/img/upload",
-                headers: {
-                    Authorization : `Bearer ${props.token}`
-                },
-                data: Data,
-                onUploadProgress: event => {
-                    const progress = parseInt(Math.round( (event.loaded*100) / event.total));
-
+            if(!file.uploaded)
+            {
+                const Data = new FormData();
+                Data.append('file', file.file);
+                api({
+                    method:"post",
+                    url: "/img/upload",
+                    headers: {
+                        Authorization : `Bearer ${props.token}`
+                    },
+                    data: Data,
+                    onUploadProgress: event => {
+                        const progress = parseInt(Math.round( (event.loaded*100) / event.total));
+    
+                        updateFileList({
+                            id: file.id,
+                            progress: progress
+                        });
+                    }
+                })
+                .then(response => {
                     updateFileList({
                         id: file.id,
-                        progress: progress
+                        uploaded: true,
                     });
-                }
-            })
-            .then(response => {
-                updateFileList({
-                    id: file.id,
-                    uploaded: true,
-                });
-            })
-            .catch(error => {
-                updateFileList({
-                    id: file.id,
-                    error: true,
-                });
-            })
+            
+                })
+                .catch(error => {
+                    updateFileList({
+                        id: file.id,
+                        error: true,
+                    });
+                })
+            }
          })
     }
 

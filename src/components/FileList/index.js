@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
-import {FiCheck} from "react-icons/fi";
+import {FaCheckCircle} from "react-icons/fa";
+import {AiFillCloseCircle} from "react-icons/ai";
 import {CircularProgressbar} from "react-circular-progressbar"
 import 'react-circular-progressbar/dist/styles.css'
 
@@ -10,22 +11,23 @@ const FileList = props => {
 
     return(
         <div className="dialog-upload">
-            {console.log("Rendering" + props.files[0])}
             {files.map(file =>(
                 <li key={file.id}>
-                    <img src={file.preview} alt={file.name}/>
-                    <div className="text">
-                            <strong>
-                                {file.name}
-                            </strong>
-                            <p>{file.readableSize}</p>
+                    <div className="left">
+                        <img src={file.preview} alt={file.name}/>
+                        <div className="text">
+                                <strong>
+                                    {file.name}
+                                </strong>
+                                <p>{file.readableSize}</p>
+                        </div>
                     </div>
-                    { file.uploaded ? 
-                        <FiCheck 
-                            size={ 22 } 
-                            color = {"green"}
-                        /> : 
-                        <CircularProgressbar 
+                    { file.uploaded && <FaCheckCircle 
+                        size={ 22 } 
+                        color={"green"}
+                    /> }
+
+                    { (props.progress > 0 && !props.upload ) && <CircularProgressbar 
                             styles={{
                                 root: {width: 24},
                                 path: { stroke: '#9C27B0' },
@@ -33,8 +35,12 @@ const FileList = props => {
                             }}
                             strokeWidth={12}
                             value={file.progress}
-                        />
-                    }
+                    /> }
+
+                    { file.error && <AiFillCloseCircle
+                        size={22}
+                        color={"red"}
+                    /> }
                 </li>
             ))}
         </div>
