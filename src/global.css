@@ -20,19 +20,21 @@
     box-sizing: border-box;
 }
 
+body, html, #root{
+    width: 100%;
+    height: 100%;
+}
+
 html{
     background:url("./assets/background.png") no-repeat center center fixed;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size: cover;
     background-size: cover;
-    width: 100%;
-    height: 100%;
+   
 } 
 body{
     font: 400 14px Roboto, sans-serif; 
-    width: 100%;
-    height: 100%;
 }
 
 button{

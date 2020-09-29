@@ -52,14 +52,26 @@ const Upload = props => {
         event.preventDefault();
     }
 
-    const updateFileList = (id, data) => {
-        const files = [...fileList.filter((file) => file.id !== id), data];
+    const updateFileList = (status) => {
+        const files = fileList.map(file => {
+
+            const {id, uploaded=false, error=false, progress} = status;
+            
+            if(file.id === id){
+               file.uploaded = uploaded;
+               file.error = error;
+               file.progress = progress;
+               return file;
+            }else
+                return file;
+        });
         setFileList(files);
     }
 
     const uploadFile = event => {
         event.preventDefault();
         fileList.forEach( (file) => {
+            
             const Data = new FormData();
             Data.append('file', file.file);
             api({
@@ -72,22 +84,23 @@ const Upload = props => {
                 onUploadProgress: event => {
                     const progress = parseInt(Math.round( (event.loaded*100) / event.total));
 
-                    updateFileList( file.id, {
-                        progress,
+                    updateFileList({
+                        id: file.id,
+                        progress: progress
                     });
                 }
             })
             .then(response => {
-                updateFileList( file.id, {
+                updateFileList({
+                    id: file.id,
                     uploaded: true,
-                    error: false
-                })
+                });
             })
             .catch(error => {
-                updateFileList( file.id, {
-                    uploaded: false,
-                    error: true
-                })
+                updateFileList({
+                    id: file.id,
+                    error: true,
+                });
             })
          })
     }
