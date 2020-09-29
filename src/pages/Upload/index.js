@@ -53,17 +53,13 @@ const Upload = props => {
     }
 
     const updateFileList = (id, data) => {
-        setFileList({ fileList: fileList.map(file => {
-           return id === file.id ? 
-                { ...fileList, ...data } :
-                file;
-            })
-        })
+        const files = [...fileList.filter((file) => file.id !== id), data];
+        setFileList(files);
     }
 
     const uploadFile = event => {
         event.preventDefault();
-        fileList.forEach( (file) =>{
+        fileList.forEach( (file) => {
             const Data = new FormData();
             Data.append('file', file.file);
             api({

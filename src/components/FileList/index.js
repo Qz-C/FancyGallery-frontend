@@ -10,6 +10,7 @@ const FileList = props => {
 
     return(
         <div className="dialog-upload">
+            {console.log("Rendering" + props.files[0])}
             {files.map(file =>(
                 <li key={file.id}>
                     <img src={file.preview} alt={file.name}/>
