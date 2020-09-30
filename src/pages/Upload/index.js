@@ -55,7 +55,7 @@ const Upload = props => {
     const updateFileList = (status) => {
         const files = fileList.map(file => {
 
-            const {id, uploaded=false, error=false, progress} = status;
+            const {id, progress, uploaded, error} = status;
             
             if(file.id === id){
                file.uploaded = uploaded;
@@ -71,7 +71,9 @@ const Upload = props => {
     const uploadFile = event => {
         event.preventDefault();
         fileList.forEach( (file) => {
-            
+
+            let progress = 0;
+
             if(!file.uploaded)
             {
                 const Data = new FormData();
@@ -84,25 +86,32 @@ const Upload = props => {
                     },
                     data: Data,
                     onUploadProgress: event => {
-                        const progress = parseInt(Math.round( (event.loaded*100) / event.total));
-    
+                        progress = parseInt(Math.round( (event.loaded*100) / event.total));
+
                         updateFileList({
                             id: file.id,
-                            progress: progress
+                            progress: progress,
+                            uploaded: false,
+                            error: false
                         });
+                        console.log(progress);
                     }
                 })
-                .then(() => {
+                .then(response => {
                     updateFileList({
                         id: file.id,
+                        progress: progress,
                         uploaded: true,
+                        error: false
                     });
             
                 })
-                .catch(() => {
+                .catch(error => {
                     updateFileList({
                         id: file.id,
-                        error: true,
+                        progress: progress,
+                        uploaded: true,
+                        error: false
                     });
                 })
             }

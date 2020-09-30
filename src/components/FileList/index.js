@@ -26,8 +26,7 @@ const FileList = props => {
                         size={ 22 } 
                         color={"green"}
                     /> }
-
-                    { (props.progress > 0 && !props.upload ) && <CircularProgressbar 
+                    {  ( (!file.uploaded && !file.error) && file.progress !== 0) ? <CircularProgressbar 
                             styles={{
                                 root: {width: 24},
                                 path: { stroke: '#9C27B0' },
@@ -35,7 +34,7 @@ const FileList = props => {
                             }}
                             strokeWidth={12}
                             value={file.progress}
-                    /> }
+                    /> : null}
 
                     { file.error && <AiFillCloseCircle
                         size={22}

@@ -97,7 +97,7 @@ const Profile = () => {
     return(
 
         <div id="container-profile">
-            { user && <HeaderProfile name={user.name}/>}
+            { user && <HeaderProfile name={user.name} />}
             <InfiniteScroll 
                 dataLength={pictures.length}
                 loader={<Loading/>}
