@@ -13,7 +13,6 @@ import Upload from "../../pages/Upload"
 import cookie from "../../services/cookies"
 
 const HeaderProfile = props => {
-
         const [token, setToken] = useState(cookie.getCookie("token"));
         const [showUpload, setShowUpload] = useState(false);
 
@@ -34,7 +33,7 @@ const HeaderProfile = props => {
                                 Upload 
                         </button>
                     </Link>
-                    <Link className="sign-out" to="#">  
+                    <Link className="sign-out" to="#" onClick={props.deAuth}>  
                         <FiLogOut size={30}/>
                     </Link>
                     { showUpload ? <Upload 

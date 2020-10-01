@@ -94,11 +94,16 @@ const Profile = () => {
 
         }
 
+    const clearToken = () => {
+        cookie.setCookie("token", "", -10000)
+        setToken("");
+    }
+
     return(
 
         <div id="container-profile">
-            { user && <HeaderProfile name={user.name} />}
-            <InfiniteScroll 
+            { user && <HeaderProfile name={user.name} deAuth={clearToken}/>}
+            <InfiniteScroll
                 dataLength={pictures.length}
                 loader={<Loading/>}
                 next={fetchData}
