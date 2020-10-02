@@ -47,52 +47,51 @@ const Profile = () => {
         })
     }, [token, history]);
 
+    const fetchData = () => {
+        api.get(`/img/list?page=${page}&items=${itemsPerPage}`, {
+            headers: {
+                Authorization : `Bearer ${token}`}
+        }).then ( response => {
+            if(response.data.length !== 0)
+            {
+                setPage(page+1);
+                setPictures([...pictures, ...response.data.imgList]);
+            }else
+                setKeepShowingScroll(false);
+
+        }).catch (error => {
+            console.log(error)
+        })
+    }
+
     //Load the pictures
     useEffect ( () => {
             fetchData();
         },[]);
 
-        //
-        const fetchData = () => {
-                api.get(`/img/list?page=${page}&items=${itemsPerPage}`, {
-                    headers: {
-                        Authorization : `Bearer ${token}`}
-                }).then ( response => {
-                    if(response.data.length !== 0)
-                    
-                    {
-                        setPage(page+1);
-                        setPictures([...pictures, ...response.data.imgList]);
-                    }else
-                        setKeepShowingScroll(false);
+    
 
-                }).catch (error => {
-                    console.log(error)
-                })
-        }
+    const imagePopUp = (picture, url, index) => {
+        setShowImage(true);
+        setImage({
+            id: picture.id,
+            name: picture.name,
+            url: url,
+            size: picture.size,
+            updated_at : picture.updated_at,
+            created_at : picture.created_at,
+            format: picture.format,
+            index: index
+        })
+    }
 
-        const imagePopUp = (picture, url, index) => {
-            setShowImage(true);
-            setImage({
-                id: picture.id,
-                name: picture.name,
-                url: url,
-                size: picture.size,
-                updated_at : picture.updated_at,
-                created_at : picture.created_at,
-                format: picture.format,
-                index: index
-            })
-        }
-
-        const deleteSingleimage = (index) => {
-            pictures.splice(index, 1);
-        }
-
-        const uploadOnDrop = event => {
-            event.preventDefault();
-
-        }
+    const deleteSingleimage = id => {
+        const pics = pictures.filter(picture => {
+            if( id !== picture.id )
+                return picture;
+        })
+        setPictures(pics);
+    }
 
     const clearToken = () => {
         cookie.setCookie("token", "", -10000)
@@ -109,11 +108,8 @@ const Profile = () => {
                 next={fetchData}
                 hasMore={ keepShowingScroll }
             >
-                <main className="gallery" 
-                      onDrop={uploadOnDrop}
-                      onDragOver={event => {event.preventDefault()}}>
+                <main className="gallery">
                     {pictures.map( (picture, index) => {
-
                             const url = `${SERVER_BASE_URL}${user.email}/${picture.name}`
                             const img = {
                                 background:`url(${url}) no-repeat center center`

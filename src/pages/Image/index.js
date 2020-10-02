@@ -101,10 +101,9 @@ const Image = props => {
             headers: {
                 Authorization : `Bearer ${props.token}`
             }
-        }).then(response => {
-            console.log(response.status);
+        }).then(() => {
             props.onClose();
-            props.deleteSingle(props.image.index);
+            props.deleteSingle(props.image.id);
         }).catch( error => {
             console.log(error.status);
         })
