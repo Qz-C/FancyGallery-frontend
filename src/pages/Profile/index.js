@@ -114,12 +114,16 @@ const Profile = () => {
                 next={fetchData}
                 hasMore={ keepShowingScroll }
             >
-            <main className="gallery">
+           { (!pictures || pictures.length === 0) ? 
+                <main>
+                    <h1> You have no images here yet. </h1>
+                </main> :
+                <main className="gallery">
                 { pictures.map( (picture, index) => {
                     const url = `${SERVER_BASE_URL}${picture.users_email}/${picture.name}`
                     const img = {
                         background:`url(${url}) no-repeat center center`
-                        } 
+                    } 
 
                     return(
                         <Link 
@@ -135,7 +139,7 @@ const Profile = () => {
                         </Link>
                     )
                 })}
-            </main>
+            </main>}
 
             {showImage && <Image 
                 image={image} 
