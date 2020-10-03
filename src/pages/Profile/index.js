@@ -98,47 +98,51 @@ const Profile = () => {
         setToken("");
     }
 
+    const updateOnUpload = picture => {
+        const pics = pictures;
+        pics.push(picture);
+        setPictures(pics);
+    }
+ 
     return(
 
         <div id="container-profile">
-            { user && <HeaderProfile name={user.name} deAuth={clearToken}/>}
+            { user && <HeaderProfile name={user.name} deAuth={clearToken} updateOnUpload={updateOnUpload}/>}
             <InfiniteScroll
                 dataLength={pictures.length}
                 loader={<Loading/>}
                 next={fetchData}
                 hasMore={ keepShowingScroll }
             >
-                <main className="gallery">
-                    {pictures.map( (picture, index) => {
-                            const url = `${SERVER_BASE_URL}${user.email}/${picture.name}`
-                            const img = {
-                                background:`url(${url}) no-repeat center center`
-                            } 
+            <main className="gallery">
+                { pictures.map( (picture, index) => {
+                    const url = `${SERVER_BASE_URL}${picture.users_email}/${picture.name}`
+                    const img = {
+                        background:`url(${url}) no-repeat center center`
+                        } 
 
-                            return(
-                                <Link 
-                                    style={img} 
-                                    className="link"
-                                    to="#"
-                                    key={picture.id}
-                                    onClick={() => imagePopUp(picture, url, index)}
-                                >
-                                    <div className="img" 
-                                         id={`img-${index}`}>
-                                    </div>
-                                </Link>
-                            )
-                    })}
-                </main>
+                    return(
+                        <Link 
+                            style={img} 
+                            className="link"
+                            to="#"
+                            key={picture.id}
+                            onClick={() => imagePopUp(picture, url)}
+                        >
+                            <div className="img" 
+                                id={`img-${index}`}>
+                            </div>
+                        </Link>
+                    )
+                })}
+            </main>
 
-                {showImage && <Image 
-                                image={image} 
-                                onClose={() => {setShowImage(false)} }
-                                token={token}
-                                deleteSingle={deleteSingleimage}
-                            />
-                }
-
+            {showImage && <Image 
+                image={image} 
+                onClose={() => {setShowImage(false)} }
+                token={token}
+                deleteSingle={deleteSingleimage}/>
+            }
             </InfiniteScroll>
         </div>
     )

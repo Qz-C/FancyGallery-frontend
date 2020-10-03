@@ -94,7 +94,6 @@ const Upload = props => {
                             uploaded: false,
                             error: false
                         });
-                        console.log(progress);
                     }
                 })
                 .then(response => {
@@ -104,9 +103,9 @@ const Upload = props => {
                         uploaded: true,
                         error: false
                     });
-            
+                    props.updateOnUpload(response.data);
                 })
-                .catch(error => {
+                .catch(() => {
                     updateFileList({
                         id: file.id,
                         progress: progress,

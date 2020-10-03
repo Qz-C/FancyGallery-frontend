@@ -36,7 +36,8 @@ const HeaderProfile = props => {
                     <Link className="sign-out" to="#" onClick={props.deAuth}>  
                         <FiLogOut size={30}/>
                     </Link>
-                    { showUpload ? <Upload 
+                    { showUpload ? <Upload
+                                    updateOnUpload={props.updateOnUpload}
                                     onClose={() => setShowUpload(false)}
                                     token ={token} 
                                     /> : false
