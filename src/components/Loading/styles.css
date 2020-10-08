@@ -1,50 +1,44 @@
-.loading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .loading .box{
+    #loading .box{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
+    width: 16em;
+    height: 16em;
   }
   
   @keyframes circle{
     0%{
-      width:  0px;
-      height: 0px;
+      width:  1em;
+      height: 1em;
       background-color: rgba(156, 39, 176, .2);
     }
     25%{
-      width:  2px;
-      height: 2px;
+      width:  2em;
+      height: 2em;
        background-color: rgba(156, 39, 176, .4);
     }
     50%{
-      width:  4px;
-      height: 4px;
+      width:  4em;
+      height: 4em;
        background-color: rgba(156, 39, 176, .6);
     }
     75%{
-      width:  6px;
-      height: 6px;
+      width:  6em;
+      height: 6em;
        background-color: rgba(156, 39, 176, .8);
     }
     100%{
-      width:  8px;
-      height: 8px;
+      width:  8em;
+      height: 8em;
       background-color: rgba(156, 39, 176, 1);
   
     }
   }
   
-   .loading .box .circle1{
+   #loading .box .circle1{
     background-color: rgb(156, 39, 176);
-    width: 8px;
-    height: 8px;
+    width: 8em;
+    height: 8em;
     border-radius: 50%;
     animation-name: circle;
     animation-duration: 400ms;
@@ -54,10 +48,10 @@
   }
   
   
-  .loading .box .circle2{
+  #loading .box .circle2{
     background-color: rgb(156, 39, 176);
-    width: 8px;
-    height: 8px;
+    width: 8em;
+    height: 8em;
     border-radius: 50%;
     animation-name: circle;
     animation-duration: 400ms;
@@ -66,10 +60,10 @@
     animation-direction: alternate;
   }
   
-  .loading .box .circle3{
+  #loading .box .circle3{
     background-color: rgb(156, 39, 176);
-    width: 8px;
-    height: 8px;
+    width: 8em;
+    height: 8em;
     border-radius: 50%;
     animation-name: circle;
     animation-duration: 400ms;

@@ -115,7 +115,7 @@ const Profile = () => {
                 </main> :
                 <InfiniteScroll
                     dataLength={pictures.length}
-                    loader={<Loading/>}
+                    loader={<Loading referenceSize={3}/>}
                     next={fetchData}
                     hasMore={ keepShowingScroll }
                     scrollableTarget={'container-profile'}

@@ -2,10 +2,21 @@ import React from 'react';
 
 import './styles.css'
 
-const Loading = () => {
+const Loading = (props) => {
+
+    const {referenceSize=1} =  props
+
+    const style = {
+        padding: '5%',
+        fontSize:`${referenceSize}px`,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    };
 
     return(
-        <div className="loading">
+        <div 
+            id="loading" style={style}>
             <div className="box">
                 <div className="circle1"></div>
             </div>
