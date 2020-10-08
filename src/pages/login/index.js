@@ -78,6 +78,10 @@ const Login = () => {
         }
     }
 
+    const registrate = () => {
+        history.push('/register');
+    }
+
     return(
         <div className="container-login">
             <Header/>
@@ -106,13 +110,9 @@ const Login = () => {
                             { loginError }
                         </div>
                         <div className="buttons">
-                            <button type="submit" className="button" >
-                                Log in
-                            </button>
-                            <button>
-                                <Link className="button" to="/register" >
+                            <input value="Log in" type="submit" id="login-button" />
+                            <button onClick={registrate}>
                                     Sign Up
-                                </Link>
                             </button>
                             
                         </div>
