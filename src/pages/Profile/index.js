@@ -115,7 +115,7 @@ const Profile = () => {
                 hasMore={ keepShowingScroll }
             >
            { (!pictures || pictures.length === 0) ? 
-                <main>
+                <main className = "no-imgs">
                     <h1> You have no images here yet. </h1>
                 </main> :
                 <main className="gallery">
