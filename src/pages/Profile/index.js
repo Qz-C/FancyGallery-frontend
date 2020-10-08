@@ -108,46 +108,48 @@ const Profile = () => {
 
         <div id="container-profile">
             { user && <HeaderProfile name={user.name} deAuth={clearToken} updateOnUpload={updateOnUpload}/>}
-            <InfiniteScroll
-                dataLength={pictures.length}
-                loader={<Loading/>}
-                next={fetchData}
-                hasMore={ keepShowingScroll }
-            >
-           { (!pictures || pictures.length === 0) ? 
+            
+            {(!pictures || pictures.length === 0) ?
                 <main className = "no-imgs">
-                    <h1> You have no images here yet. </h1>
+                        <h1> You have no images here yet. </h1>
                 </main> :
-                <main className="gallery">
-                { pictures.map( (picture, index) => {
-                    const url = `${SERVER_BASE_URL}${picture.users_email}/${picture.name}`
-                    const img = {
-                        background:`url(${url}) no-repeat center center`
-                    } 
+                <InfiniteScroll
+                    dataLength={pictures.length}
+                    loader={<Loading/>}
+                    next={fetchData}
+                    hasMore={ keepShowingScroll }
+                    scrollableTarget={'container-profile'}
+                >
+                    <main className="gallery">
+                    { pictures.map( (picture, index) => {
+                        const url = `${SERVER_BASE_URL}${picture.users_email}/${picture.name}`
+                        const img = {
+                            background:`url(${url}) no-repeat center center`
+                        } 
 
-                    return(
-                        <Link 
-                            style={img} 
-                            className="link"
-                            to="#"
-                            key={picture.id}
-                            onClick={() => imagePopUp(picture, url)}
-                        >
-                            <div className="img" 
-                                id={`img-${index}`}>
-                            </div>
-                        </Link>
-                    )
-                })}
-            </main>}
+                        return(
+                            <Link 
+                                style={img} 
+                                className="link"
+                                to="#"
+                                key={picture.id}
+                                onClick={() => imagePopUp(picture, url)}
+                            >
+                                <div className="img" 
+                                    id={`img-${index}`}>
+                                </div>
+                            </Link>
+                        )
+                    })}
+                </main>
 
-            {showImage && <Image 
-                image={image} 
-                onClose={() => {setShowImage(false)} }
-                token={token}
-                deleteSingle={deleteSingleimage}/>
-            }
-            </InfiniteScroll>
+                {showImage && <Image 
+                    image={image} 
+                    onClose={() => {setShowImage(false)} }
+                    token={token}
+                    deleteSingle={deleteSingleimage}/>
+                }
+                </InfiniteScroll>}
         </div>
     )
 }

@@ -1,9 +1,28 @@
 #container-profile{
-    background-image: linear-gradient(#0A0A0A, #3C3939 );
+    background-image: linear-gradient(#3C3939, #0A0A0A );
     position: absolute;
     width: 100%;
     height: 100%; 
     color: #FFFFFF;
+    overflow-y: auto;
+}
+
+.no-imgs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 100%;
+}
+
+.no-imgs h1{
+    font-size: 50px;
+    background-color: black;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
 }
 
 .gallery{
@@ -37,5 +56,5 @@
 
 .gallery .link .img:hover{
     background-color: transparent;
-    
 }
+
