@@ -1,8 +1,8 @@
 .login-float-box{
     box-shadow: black 3px 3px 10px;
     background-image: linear-gradient(to right, #4D0025, #A520B0 );
-    min-width: 320px !important;
-    min-height: 180px !important;
+    min-width: 320px;
+    min-height: 180px;
     border-radius: 10px;
     border: none;
     display: flex;
@@ -14,7 +14,6 @@
 }
 
 .login-float-box h3{
-
     font-size: 20px;
     font-weight: bold;
 }
@@ -22,4 +21,12 @@
 .login-float-box .social-media svg{
     margin-right: 10px;
     margin-left: 30px;
+}
+
+@media only screen and (max-width: 600px){
+    .login-float-box{
+        margin-bottom: -120px;
+        min-width: 220px;
+        min-height: 150px;
+    }
 }

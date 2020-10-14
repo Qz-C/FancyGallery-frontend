@@ -53,3 +53,38 @@
     background-color: rgb(202, 201, 201);
     box-shadow: black 3px 3px 10px;
 }
+
+@media only screen and (max-width: 600px){
+
+    .container-signup{
+        width: 100%;
+        height: 100%; 
+        color: #FFFFFF;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .container-signup section{
+        height: 700px;
+        padding: 20px !important;
+    }
+    .container-signup section .bottom-div{
+        all: unset;
+        display: inline-block;
+        background-color: rgb(255,255,255,0.7);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 365px;
+        min-width: 240px;    
+        padding: 40px 8px 40px 8px;
+    }
+
+    .container-signup section .bottom-div form{
+        margin-top: 100px;
+        display:flex;
+        flex-direction: column;
+    }
+}

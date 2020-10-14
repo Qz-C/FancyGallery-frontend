@@ -312,7 +312,7 @@ const Signup = () => {
         <div className="container-signup">
             <Header/>
             <section>
-                <LoginFloatBox/>
+                <LoginFloatBox text={"Sign up"}/>
                 <div className="bottom-div">
                     <form id="form" onSubmit={handleSubmit} onClick={clearForm}>
                         <div className="inputs">

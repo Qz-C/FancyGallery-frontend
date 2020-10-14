@@ -30,9 +30,7 @@ const Image = props => {
         setIsEditing(true);
         const textElement = document.getElementById("picture-name");
         const divElement = document.getElementById("picture-name-content");
-        
-        textElement.contentEditable = true;
-        
+        textElement.contentEditable = true;  
         divElement.style.backgroundColor = "#181818"
         divElement.style.padding = "5px"
         divElement.style.borderRadius = "10px"
@@ -118,9 +116,9 @@ const Image = props => {
                             <div id="picture-name-content">
                                 
                                 { isEditing ? null : <>
-                                    <h1 id="picture-name" contentEditable={false} onBlur={ event => {setNewName(event.target.value)}}>
+                                    <h3 id="picture-name" contentEditable={false} onBlur={ event => {setNewName(event.target.value)}}>
                                         { newName !== "" ? newName : (props.image.name).split('.')[0] }
-                                    </h1>
+                                    </h3>
                                     <Link to="#" onClick={ handleEnableEditing }>
                                         <FiEdit2 size={16}/>
                                     </Link>
@@ -139,24 +137,24 @@ const Image = props => {
                                 </> : null }
 
                             </div>
-                            <h1>
+                            <h3>
                                 { filesize(props.image.size) } 
-                            </h1>
-                            <h1>
+                            </h3>
+                            <h3>
                                 { (props.image.created_at).split('T')[0] }
-                            </h1>
-                            <h1>
+                            </h3>
+                            <h3>
                                 { (props.image.format).toUpperCase() }
-                            </h1>
-                            <Link to="#" >
-                                <FiTrash2 color={"#FFFFFF"} size={22} onClick={handleDeleteImg}/>
-                            </Link>
-                            <Link to="#" >
-                                <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
-                            </Link>
-                            
-                            
+                            </h3>
                 </div>
+                <div className="icons-img">
+                                <Link className="img-button" to="#" >
+                                    <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
+                                </Link>
+                                <Link className="img-button" to="#" >
+                                    <FiTrash2 color={"#FFFFFF"} size={22} onClick={handleDeleteImg}/>
+                                </Link>
+                </div>   
             </section>
         </Modal>
             

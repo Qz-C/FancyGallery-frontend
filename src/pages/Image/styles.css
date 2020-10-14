@@ -24,12 +24,30 @@
     max-height: 70vh;
 }
 
+.icons-img .img-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #9C27B0;
+    padding: 15px;
+    border-radius: 100%;
+}
+
 .img-content .menu{
     display: flex;
     height: auto;
     width: 100%;
     padding: 20px;
     justify-content: space-between;
+}
+
+.icons-img{
+    width: 100%;
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .img-content .menu #picture-name-content{
@@ -56,3 +74,19 @@
     color: #363636;       
 }
 
+@media only screen and (max-width: 600px){
+    .img-content{
+        max-width: 90vw;
+    }
+    .img-content .menu{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .img-content .menu .icons-img{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+}

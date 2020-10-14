@@ -86,7 +86,7 @@ const Login = () => {
         <div className="container-login">
             <Header/>
             <section>
-                <LoginFloatBox/>
+                <LoginFloatBox text={"Log in"}/>
                 <div className="bottom-div">
                     <form id="form" onSubmit={handleLogin} onClick={clearForm}>
                         <div className="inputs">

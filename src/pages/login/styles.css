@@ -1,5 +1,4 @@
 .container-login{
-    position: absolute;
     width: 100%;
     height: 100%; 
     color: #FFFFFF;
@@ -15,7 +14,6 @@
 }
 
 .container-login section .bottom-div{
-
     padding: 40px;
     width: 365px;
     background-color: rgb(255,255,255,0.7);
@@ -77,4 +75,39 @@
     border: none;
     background-color: #9C27B0;
     color: #ffffff;
+}
+
+@media only screen and (max-width: 600px){
+
+    .container-login{
+        width: 100%;
+        height: 100%; 
+        color: #FFFFFF;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .container-login section{
+        padding: 20px !important;
+        height: 700px;
+    }
+    .container-login section .bottom-div{
+        all: unset;
+        display: inline-block;
+        background-color: rgb(255,255,255,0.7);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 300px;
+        min-width: 240px;    
+        padding: 40px 8px 40px 8px;
+    }
+
+    .container-login section .bottom-div form{
+        margin-top: 100px;
+        display:flex;
+        flex-direction: column;
+    }
 }

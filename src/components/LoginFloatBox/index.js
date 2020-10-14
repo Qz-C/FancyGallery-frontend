@@ -8,9 +8,9 @@ import { FaTwitter } from "react-icons/fa";
 
 import { FaGoogle } from "react-icons/fa";
 
-const LoginFloatBox = () => (
+const LoginFloatBox = props => (
     <div className="login-float-box">
-        <h3> Log in </h3>
+        <h3> {props.text} </h3>
         <div className="social-media">
             <FaFacebookSquare size={18}/>
             <FaTwitter size={18}/>
