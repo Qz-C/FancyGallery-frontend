@@ -123,8 +123,8 @@ const Upload = props => {
                  onDrop={handleDrop} 
                  onDragOver={handleDragOver}>
                 <form id="upload-form" onSubmit={uploadFile}>
-                    <h3> Drop the images here </h3>
-                    <p> or </p>
+                    <h3 className="drop-only-text"> Drop the images here </h3>
+                    <p className="drop-only-text"> or </p>
                     <input  type="file" 
                             id="file-input" 
                             multiple={true} 

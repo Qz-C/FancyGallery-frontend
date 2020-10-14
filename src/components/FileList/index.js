@@ -22,24 +22,26 @@ const FileList = props => {
                                 <p>{file.readableSize}</p>
                         </div>
                     </div>
-                    { file.uploaded && <FaCheckCircle 
-                        size={ 22 } 
-                        color={"green"}
-                    /> }
-                    {  ( (!file.uploaded && !file.error) && file.progress !== 0) ? <CircularProgressbar 
-                            styles={{
-                                root: {width: 24},
-                                path: { stroke: '#9C27B0' },
-                                trail: {stroke: '#666'}
-                            }}
-                            strokeWidth={12}
-                            value={file.progress}
-                    /> : null}
+                    <div className="right">
+                        { file.uploaded && <FaCheckCircle 
+                            size={ 22 } 
+                            color={"green"}
+                        /> }
+                        {  ( (!file.uploaded && !file.error) && file.progress !== 0) ? <CircularProgressbar 
+                                styles={{
+                                    root: {width: 24},
+                                    path: { stroke: '#9C27B0' },
+                                    trail: {stroke: '#666'}
+                                }}
+                                strokeWidth={12}
+                                value={file.progress}
+                        /> : null}
 
-                    { file.error && <AiFillCloseCircle
-                        size={22}
-                        color={"red"}
-                    /> }
+                        { file.error && <AiFillCloseCircle
+                            size={22}
+                            color={"red"}
+                        /> }
+                    </div>
                 </li>
             ))}
         </div>

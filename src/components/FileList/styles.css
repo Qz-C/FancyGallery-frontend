@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow-x: hidden;
 
 }
 
@@ -15,6 +16,7 @@
 }
 
 .dialog-upload li .left .text{
+    text-align: left;
     display: flex; 
     flex-direction: column; 
     align-items: flex-start;
@@ -29,4 +31,11 @@
     margin-right: 5px;
     width: 40px;
     height: 40px;
+}
+
+@media only screen and (max-width: 600px){
+    .dialog-upload li{
+        display: flex;
+        max-width: 250px;
+    }
 }

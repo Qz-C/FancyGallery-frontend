@@ -33,6 +33,11 @@
     background-color: #9C27B0;
     padding: 15px;
     border-radius: 100%;
+    transition: all 300ms;
+}
+
+.icons-img .img-button:hover{
+    opacity: 0.5;
 }
 
 .img-content .menu{

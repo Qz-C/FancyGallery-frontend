@@ -9,7 +9,7 @@
     filter: drop-shadow( 3px 3px 10px #000000);
     flex-direction: column;
     text-align: center;
-    border: 2px dotted #9C27B0;
+    border: 3px dashed #9C27B0;
     overflow-y: auto;
 }
 
@@ -54,3 +54,8 @@
     padding: 1em;
 }
 
+@media only screen and (max-width: 600px){
+    .drop-only-text{
+        display: none;
+    }
+}
