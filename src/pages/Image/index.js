@@ -92,16 +92,16 @@ const Image = props => {
             })
     }
 
-    const handleDeleteImg = () => {
+    const handleDeleteImg = (url) => {
         api({
             method: "delete",
-            url: `/img/delete?id=${props.image.id}`,
+            url: url,
             headers: {
                 Authorization : `Bearer ${props.token}`
             }
         }).then(() => {
-            props.onClose();
             props.deleteSingle(props.image.id);
+            props.onClose();
         }).catch( error => {
             console.log(error.status);
         })
@@ -152,7 +152,7 @@ const Image = props => {
                                     <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
                                 </Link>
                                 <Link className="img-button" to="#" >
-                                    <FiTrash2 color={"#FFFFFF"} size={22} onClick={handleDeleteImg}/>
+                                    <FiTrash2 color={"#FFFFFF"} size={22} onClick={ () => handleDeleteImg(props.image.url)}/>
                                 </Link>
                 </div>   
             </section>

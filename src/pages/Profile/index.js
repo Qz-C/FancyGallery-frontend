@@ -122,7 +122,7 @@ const Profile = () => {
                 >
                     <main className="gallery">
                     { pictures.map( (picture, index) => {
-                        const url = `${SERVER_BASE_URL}${picture.users_email}/${picture.name}`
+                        const url = picture.url;
                         const img = {
                             background:`url(${url}) no-repeat center center`
                         } 
