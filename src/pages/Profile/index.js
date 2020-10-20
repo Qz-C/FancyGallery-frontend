@@ -71,12 +71,12 @@ const Profile = () => {
 
     
 
-    const imagePopUp = (picture, url, index) => {
+    const imagePopUp = (picture, index) => {
         setShowImage(true);
         setImage({
             id: picture.id,
             name: picture.name,
-            url: url,
+            url: picture.url,
             size: picture.size,
             updated_at : picture.updated_at,
             created_at : picture.created_at,
@@ -122,9 +122,8 @@ const Profile = () => {
                 >
                     <main className="gallery">
                     { pictures.map( (picture, index) => {
-                        const url = picture.url;
                         const img = {
-                            background:`url(${url}) no-repeat center center`
+                            background:`url(${picture.url}) no-repeat center center`
                         } 
 
                         return(
@@ -133,7 +132,7 @@ const Profile = () => {
                                 className="link"
                                 to="#"
                                 key={picture.id}
-                                onClick={() => imagePopUp(picture, url)}
+                                onClick={() => imagePopUp(picture, index)}
                             >
                                 <div className="img" 
                                     id={`img-${index}`}>

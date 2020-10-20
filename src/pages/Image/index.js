@@ -79,6 +79,7 @@ const Image = props => {
             //This option says that the response instead of a JSON, as default, will be a file.
             responseType : "blob"     
         }).then(response => {
+                    console.log(response);
                     //It creates a reference to blob object in order to uses it in the DOM 
                     const imgurl = window.URL.createObjectURL(response.data);
                     //It creates a link element
@@ -92,16 +93,16 @@ const Image = props => {
             })
     }
 
-    const handleDeleteImg = (url) => {
+    const handleDeleteImg = (picture) => {
         api({
             method: "delete",
-            url: url,
+            url: `/img/delete?id=${picture.id}`,
             headers: {
                 Authorization : `Bearer ${props.token}`
             }
         }).then(() => {
-            props.deleteSingle(props.image.id);
             props.onClose();
+            props.deleteSingle(props.image.id);
         }).catch( error => {
             console.log(error.status);
         })
@@ -152,7 +153,7 @@ const Image = props => {
                                     <FiDownload color={"FFFFFF"} size={22} onClick={handleDownlodImg} />
                                 </Link>
                                 <Link className="img-button" to="#" >
-                                    <FiTrash2 color={"#FFFFFF"} size={22} onClick={ () => handleDeleteImg(props.image.url)}/>
+                                    <FiTrash2 color={"#FFFFFF"} size={22} onClick={ () => handleDeleteImg(props.image)}/>
                                 </Link>
                 </div>   
             </section>
